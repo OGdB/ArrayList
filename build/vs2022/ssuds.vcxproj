@@ -22,7 +22,7 @@
     <ProjectGuid>{df832501-417a-4830-8bf0-9000dbe05183}</ProjectGuid>
     <RootNamespace>ssuds</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Lab03</ProjectName>
+    <ProjectName>ArrayList</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
