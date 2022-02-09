@@ -1,5 +1,5 @@
-libdir=C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/sdk/lib
-includedir=C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/sdk/include
+libdir=C:\Users\oedsd\Desktop\ArrayList\Google Test\sdk/lib
+includedir=C:\Users\oedsd\Desktop\ArrayList\Google Test\sdk/include
 
 Name: gtest
 Description: GoogleTest (without main() function)

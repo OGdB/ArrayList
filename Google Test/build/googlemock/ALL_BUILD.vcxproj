@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{BFF229DB-608F-309E-9D44-531FA7EAC871}</ProjectGuid>
+    <ProjectGuid>{888F923E-3B66-3150-ACDA-98871D37D3B0}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -66,7 +66,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -76,7 +76,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -86,7 +86,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -105,11 +105,11 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build" --check-stamp-file "C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build/googlemock/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googlemock/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -117,12 +117,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build" --check-stamp-file "C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build/googlemock/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googlemock/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -130,12 +130,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build" --check-stamp-file "C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build/googlemock/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googlemock/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -143,12 +143,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googlemock/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build" --check-stamp-file "C:/Users/oedsd/OneDrive - Shawnee State University/Data Structures/Lab03/Google Test/build/googlemock/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googlemock/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -156,34 +156,34 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googlemock\cmake\gmock_main.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\ZERO_CHECK.vcxproj">
-      <Project>{2E7758F0-6800-3527-8177-2624B137912E}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\ZERO_CHECK.vcxproj">
+      <Project>{F3CAAEBA-7C10-301B-9F45-0CB3A1122970}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\gmock.vcxproj">
-      <Project>{9D0EF04B-9F8D-3008-9501-A056745EF09E}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\gmock.vcxproj">
+      <Project>{E9D38210-D9F7-3637-8A3C-BCE6A595641D}</Project>
       <Name>gmock</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googlemock\gmock_main.vcxproj">
-      <Project>{88F91C35-5D21-3F98-9800-5B8441C69EA6}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googlemock\gmock_main.vcxproj">
+      <Project>{F998470E-1D6D-30BD-9D19-E9F0EA9E3AF8}</Project>
       <Name>gmock_main</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googletest\gtest.vcxproj">
-      <Project>{8D0CDAA9-170F-319F-BE93-4B409865387B}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\gtest.vcxproj">
+      <Project>{1F6A751C-CC78-3668-B59B-454B9311AECD}</Project>
       <Name>gtest</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\OneDrive - Shawnee State University\Data Structures\Lab03\Google Test\build\googletest\gtest_main.vcxproj">
-      <Project>{04E8BC24-11E5-3088-B291-8349553A9904}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\gtest_main.vcxproj">
+      <Project>{59E9500A-A1AB-317E-8616-E4D7A246366D}</Project>
       <Name>gtest_main</Name>
     </ProjectReference>
   </ItemGroup>
