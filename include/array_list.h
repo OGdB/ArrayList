@@ -129,7 +129,6 @@ namespace ssuds
 		/// Copy-constructor
 		ArrayList(const ArrayList& other) : mCapacity(other.mCapacity), mSize(other.mSize)
 		{
-			cout << "CTRL C > CTRL V" << endl;
 			mData = new T[mCapacity];
 			for (int i = 0; i < other.size(); i++)
 				mData[i] = other[i];
@@ -199,7 +198,7 @@ namespace ssuds
 		/// <param name="index">the index at which to insert (must be >= 0 and <= size) </param>
 		void insert(T val, int index)
 		{
-			if (index > mSize)
+			if (index > mSize || index < 0)
 				throw out_of_range("Invalid index: " + to_string(index));
 
 			// check to see if we need to increase capacity first

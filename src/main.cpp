@@ -17,7 +17,7 @@ ArrayList<float> moveFunction()
 }
 
 #pragma region TESTS
-TEST(ArrayTests, AppendAndBracketsOverloadTest)
+TEST(ArrayTests, AppendAndBracketsOverload)
 {
     ArrayList<int> test_list_int;
     test_list_int.append(-10);
@@ -48,7 +48,30 @@ TEST(ArrayTests, AppendAndBracketsOverloadTest)
     EXPECT_EQ(third_string, "General") << "Wrong value at index!";
     EXPECT_EQ(fourth_string, "Kenobi!") << "Wrong value at index!";
 }
-TEST(ArrayTests, SizeAndCapacityTest)
+TEST(ArrayTests, InsertInArray)
+{
+    ArrayList<float> test_list;
+    test_list.append(1.1f);
+    test_list.append(2.2f);
+    test_list.append(3.3f);
+    test_list.append(4.4f);
+    test_list.append(5.5f);
+
+    test_list.insert(420.0f, 1);
+    test_list.insert(69.0f, 4);
+
+    EXPECT_EQ(test_list[0], 1.1f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[1], 420.0f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[2], 2.2f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[3], 3.3f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[4], 69.0f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[5], 4.4f) << "Wrong value at index!";
+    EXPECT_EQ(test_list[6], 5.5f) << "Wrong value at index!";
+
+    EXPECT_THROW(test_list.insert(44.0f, -10), out_of_range) << "Should throw out of range exception!";
+    EXPECT_THROW(test_list.insert(44.0f, 20), out_of_range) << "Should throw out of range exception!";
+}
+TEST(ArrayTests, SizeAndCapacity)
 {
     ArrayList<float> test_list;
     test_list.append(1.6f);
@@ -68,17 +91,7 @@ TEST(ArrayTests, EqualityOperatorOverload)
     second_list.append(2);
     second_list.append(3);
 }
-TEST(ArrayTests, AssignOperatorOverload)
-{
-    ArrayList<int> first_list;
-    first_list.append(1);
-    first_list.append(2);
-    first_list.append(3);
-
-    ArrayList<int> second_list = first_list;
-    EXPECT_EQ(first_list, second_list);
-}
-TEST(ArrayTests, UnequalOperatorOverloadTest)
+TEST(ArrayTests, UnequalityOperatorOverload)
 {
     ArrayList<int> first_list;
     first_list.append(1);
@@ -92,7 +105,17 @@ TEST(ArrayTests, UnequalOperatorOverloadTest)
 
     ASSERT_NE(first_list, second_list);
 }
-TEST(ArrayTests, InitializerTest)
+TEST(ArrayTests, AssignOperatorOverload)
+{
+    ArrayList<int> first_list;
+    first_list.append(1);
+    first_list.append(2);
+    first_list.append(3);
+
+    ArrayList<int> second_list = first_list;
+    EXPECT_EQ(first_list, second_list);
+}
+TEST(ArrayTests, Initializer)
 {
     ArrayList<int> first_list;
     first_list.append(1);
@@ -101,7 +124,7 @@ TEST(ArrayTests, InitializerTest)
     ArrayList<int> test_list_with_initializer(first_list);
 
 }
-TEST(ArrayTests, InsertionOverload)
+TEST(ArrayTests, StreamInsertionOverload)
 {
     ArrayList<float> test_list;
     test_list.append(1);
