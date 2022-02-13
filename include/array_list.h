@@ -1,10 +1,6 @@
 #pragma once
 #include <string>
 
-// Note: in C++, a general tempate (like this one) must be defined inline
-// entirely in the .h file (no .cpp files).  So, in this lab, array_list.cpp
-// contents are moved here
-
 using namespace std;
 
 namespace ssuds
@@ -78,12 +74,13 @@ namespace ssuds
 		ArrayList() : mSize(0), mCapacity(0), mData(nullptr)
 		{
 		};
+
 		ArrayList(const initializer_list<T>& ilist) : mSize(0), mCapacity(0), mData(nullptr)
 		{
-			// intentionally empty
 			for (T val : ilist)
 				append.val;
 		};
+
 		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData)
 		{
 			cout << "I LIKE TO MOVE IT MOVE IT" << endl;
