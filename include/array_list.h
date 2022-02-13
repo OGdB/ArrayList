@@ -114,21 +114,25 @@ namespace ssuds
 		{
 		};
 
+		// Initializer_list constructor
 		ArrayList(const initializer_list<T>& ilist) : mSize(0), mCapacity(0), mData(nullptr)
 		{
+			//cout << "Initializer list" << endl;
 			for (T val : ilist)
-				append.val;
+				append(val);
 		};
 
+		// Move constructor
 		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData)
 		{
 			cout << "I LIKE TO MOVE IT MOVE IT" << endl;
 			other.mData = nullptr;
 		};
 
-		/// Copy-constructor
+		// Copy constructor
 		ArrayList(const ArrayList& other) : mCapacity(other.mCapacity), mSize(other.mSize)
 		{
+			cout << other << endl;
 			mData = new T[mCapacity];
 			for (int i = 0; i < other.size(); i++)
 				mData[i] = other[i];
@@ -166,7 +170,7 @@ namespace ssuds
 				delete[] mData;
 			mData = nullptr;
 			mSize = 0;
-			mCapacity = 0;
+			mCapacity = msMinCapacity;
 		}
 
 		/// <summary>
@@ -279,6 +283,11 @@ namespace ssuds
 			return mSize;
 		}
 
+		/// @brief Return the capacity of the array
+		int capacity()
+		{
+			return mCapacity;
+		}
 
 	protected:
 		/// <summary>
@@ -344,7 +353,6 @@ namespace ssuds
 		}
 
 	public:
-		// Keeps track of 
 		class ArrayListIterator
 		{
 		protected:
@@ -391,12 +399,22 @@ namespace ssuds
 
 		ArrayListIterator begin()
 		{
-			return ArrayListIterator(this, 0); // This points to the ArrayList which this class is in.
+			return ArrayListIterator(this, 0);
 		}
 
 		ArrayListIterator end()
 		{
-			return ArrayListIterator(this, mData.mSize);
+			return ArrayListIterator(this, mSize - 1);
+		}
+
+		ArrayListIterator rbegin()
+		{
+			return ArrayListIterator(this, mSize - 1);
+		}
+
+		ArrayListIterator rend()
+		{
+			return ArrayListIterator(this, 0);
 		}
 	};
 }
