@@ -17,7 +17,6 @@ ArrayList<float> moveFunction()
 }
 
 #pragma region TESTS
-/// @brief Test overload of [] after ArrayList var. e.g: test_list[0] accessing test_list.mData[0]
 TEST(ArrayTests, AppendAndBracketsOverloadTest)
 {
     ArrayList<int> test_list_int;
@@ -49,8 +48,6 @@ TEST(ArrayTests, AppendAndBracketsOverloadTest)
     EXPECT_EQ(third_string, "General") << "Wrong value at index!";
     EXPECT_EQ(fourth_string, "Kenobi!") << "Wrong value at index!";
 }
-
-/// @brief Test if the size and capacity increase and decrease appropiately.
 TEST(ArrayTests, SizeAndCapacityTest)
 {
     ArrayList<float> test_list;
@@ -59,8 +56,6 @@ TEST(ArrayTests, SizeAndCapacityTest)
     test_list.append(1.9f);
     EXPECT_EQ(test_list.size(), 2) << "Wrong size";
 }
-
-
 TEST(ArrayTests, EqualityOperatorOverload)
 {
     ArrayList<int> first_list;
@@ -97,7 +92,6 @@ TEST(ArrayTests, UnequalOperatorOverloadTest)
 
     ASSERT_NE(first_list, second_list);
 }
-
 TEST(ArrayTests, InitializerTest)
 {
     ArrayList<int> first_list;
@@ -107,8 +101,6 @@ TEST(ArrayTests, InitializerTest)
     ArrayList<int> test_list_with_initializer(first_list);
 
 }
-
-/// @brief Test the Insertion overload (<<)
 TEST(ArrayTests, InsertionOverload)
 {
     ArrayList<float> test_list;
