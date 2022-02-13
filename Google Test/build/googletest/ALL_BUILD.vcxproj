@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{888F923E-3B66-3150-ACDA-98871D37D3B0}</ProjectGuid>
+    <ProjectGuid>{FA5AFB78-D64F-33ED-8F36-355595F6025C}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -66,7 +66,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -76,7 +76,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -86,7 +86,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\include;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -105,11 +105,11 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\CMakeLists.txt">
       <UseUtf8Encoding>Always</UseUtf8Encoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -117,12 +117,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -130,12 +130,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -143,12 +143,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main/googletest/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/googletest-main/googletest-main" "-BC:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build" --check-stamp-file "C:/Users/oedsd/Desktop/Shawnee Repos/Data Structures/ArrayList/Google Test/build/googletest/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -156,26 +156,26 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.22\Modules\BasicConfigVersion-AnyNewerVersion.cmake.in;C:\Program Files\CMake\share\cmake-3.22\Modules\CMakePackageConfigHelpers.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\CheckLibraryExists.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindPython\Support.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\FindThreads.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.22\Modules\WriteBasicConfigVersionFile.cmake;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\Config.cmake.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\gtest_main.pc.in;C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\googletest-main\googletest-main\googletest\cmake\internal_utils.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\ZERO_CHECK.vcxproj">
-      <Project>{F3CAAEBA-7C10-301B-9F45-0CB3A1122970}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\ZERO_CHECK.vcxproj">
+      <Project>{8125E283-34C6-386A-8D27-1AAB96AD14B7}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\gtest.vcxproj">
-      <Project>{1F6A751C-CC78-3668-B59B-454B9311AECD}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\gtest.vcxproj">
+      <Project>{D5E089B2-BAB6-3D16-B8E3-E777AF34EDD1}</Project>
       <Name>gtest</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\oedsd\Desktop\ArrayList\Google Test\build\googletest\gtest_main.vcxproj">
-      <Project>{59E9500A-A1AB-317E-8616-E4D7A246366D}</Project>
+    <ProjectReference Include="C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\build\googletest\gtest_main.vcxproj">
+      <Project>{D6A1C320-D6EC-374F-9138-8D9F885EAC78}</Project>
       <Name>gtest_main</Name>
     </ProjectReference>
   </ItemGroup>

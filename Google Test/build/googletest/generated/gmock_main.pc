@@ -1,5 +1,5 @@
-libdir=C:\Users\oedsd\Desktop\ArrayList\Google Test\sdk/lib
-includedir=C:\Users\oedsd\Desktop\ArrayList\Google Test\sdk/include
+libdir=C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\sdk/lib
+includedir=C:\Users\oedsd\Desktop\Shawnee Repos\Data Structures\ArrayList\Google Test\sdk/include
 
 Name: gmock_main
 Description: GoogleMock (with main() function)
