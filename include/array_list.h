@@ -68,6 +68,45 @@ namespace ssuds
 		return *this;
 	}
 
+	bool operator==(const ArrayList<T> other) const
+	{
+		if (mSize == other.mSize)
+		{
+			for (int i = 0; i < mSize; i++)
+			{
+				if (mData[i] != other[i])
+				{
+					return false;
+				}
+			}
+		}
+		else 
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	bool operator!=(const ArrayList<T> other) const
+	{
+		if (mSize == other.mSize)
+		{
+			for (int i = 0; i < mSize; i++)
+			{
+				if (mData[i] != other[i])
+				{
+					return true;
+				}
+			}
+		}
+		else
+		{
+			return true;
+		}
+
+		return false;
+	}
 
 	public:
 		/// Default constructor

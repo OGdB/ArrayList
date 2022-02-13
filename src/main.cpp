@@ -16,6 +16,7 @@ ArrayList<float> moveFunction()
     return this_list;
 }
 
+#pragma region TESTS
 /// @brief Test overload of [] after ArrayList var. e.g: test_list[0] accessing test_list.mData[0]
 TEST(ArrayTests, AppendAndBracketsOverloadTest)
 {
@@ -34,7 +35,7 @@ TEST(ArrayTests, AppendAndBracketsOverloadTest)
 
     ArrayList<string> test_list_string;
     test_list_string.append("Hello");
-    test_list_string.append("There");
+    test_list_string.append("There!");
     test_list_string.append("General");
     test_list_string.append("Kenobi!");
 
@@ -44,19 +45,67 @@ TEST(ArrayTests, AppendAndBracketsOverloadTest)
     string fourth_string = test_list_string[3];
 
     EXPECT_EQ(first_string, "Hello") << "Wrong value at index!";
-    EXPECT_EQ(second_string, "There") << "Wrong value at index!";
+    EXPECT_EQ(second_string, "There!") << "Wrong value at index!";
     EXPECT_EQ(third_string, "General") << "Wrong value at index!";
     EXPECT_EQ(fourth_string, "Kenobi!") << "Wrong value at index!";
 }
 
-/// @brief Test the append function, adding a variable of type T to the end of the array.
-TEST(ArrayTests, AppendTest)
+/// @brief Test if the size and capacity increase and decrease appropiately.
+TEST(ArrayTests, SizeAndCapacityTest)
 {
-    ArrayList<string> test_list;
-    test_list.append("Hello");
-    test_list.append("There");
-    test_list.append("General Kenobi!");
-    EXPECT_EQ("Hello", test_list[0]) << "";
+    ArrayList<float> test_list;
+    test_list.append(1.6f);
+    EXPECT_EQ(test_list.size(), 1) << "Wrong size";
+    test_list.append(1.9f);
+    EXPECT_EQ(test_list.size(), 2) << "Wrong size";
+}
+
+
+TEST(ArrayTests, EqualityOperatorOverload)
+{
+    ArrayList<int> first_list;
+    first_list.append(1);
+    first_list.append(2);
+    first_list.append(3);
+
+    ArrayList<int> second_list;
+    second_list.append(1);
+    second_list.append(2);
+    second_list.append(3);
+}
+TEST(ArrayTests, AssignOperatorOverload)
+{
+    ArrayList<int> first_list;
+    first_list.append(1);
+    first_list.append(2);
+    first_list.append(3);
+
+    ArrayList<int> second_list = first_list;
+    EXPECT_EQ(first_list, second_list);
+}
+TEST(ArrayTests, UnequalOperatorOverloadTest)
+{
+    ArrayList<int> first_list;
+    first_list.append(1);
+    first_list.append(2);
+    first_list.append(3);
+
+    ArrayList<int> second_list;
+    second_list.append(55);
+    second_list.append(5234);
+    second_list.append(555);
+
+    ASSERT_NE(first_list, second_list);
+}
+
+TEST(ArrayTests, InitializerTest)
+{
+    ArrayList<int> first_list;
+    first_list.append(1);
+    first_list.append(2);
+    first_list.append(3);
+    ArrayList<int> test_list_with_initializer(first_list);
+
 }
 
 /// @brief Test the Insertion overload (<<)
@@ -77,7 +126,7 @@ TEST(ArrayTests, InsertionOverload)
 
     EXPECT_EQ("[1, 2, 3]", oss.str()) << "Cout did not print intended output";
 }
-
+#pragma endregion
 
 int main()
 {
