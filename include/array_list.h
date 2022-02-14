@@ -358,12 +358,14 @@ namespace ssuds
 		protected:
 			ArrayList* mArrayListPtr;
 			unsigned int mCurPosition; // current value of ArrayList
+			bool reversed;
 			// IT attributes
 		public:
-			ArrayListIterator(ArrayList* this_array, int start_pos)
+			ArrayListIterator(ArrayList* this_array = nullptr, int start_pos = 0, bool reversed = false)
 			{
-				mCurPosition = start_pos;
 				mArrayListPtr = this_array;
+				mCurPosition = start_pos;
+				reversed = reversed;
 			}
 
 			/// @brief Check if this arraylistoperator points to the same value as another.
@@ -386,7 +388,27 @@ namespace ssuds
 
 			void operator++(int dummy)
 			{
-				mCurPosition++; // Advance the iterator using it++;
+				if (reversed)
+				{
+					if (mCurPosition != 0)
+						mCurPosition--;
+				}
+				else 
+				{
+					if (mCurPosition != mSize - 1)
+						mCurPosition++; // Advance the iterator using it++;
+				}
+			}
+			void operator--(int dummy)
+			{
+				if (reversed)
+				{
+					mCurPosition++;
+				}
+				else 
+				{
+					mCurPosition--; // Go backwards with the iterator
+				}
 			}
 
 			ArrayListIterator operator+(int offset)
@@ -399,22 +421,22 @@ namespace ssuds
 
 		ArrayListIterator begin()
 		{
-			return ArrayListIterator(this, 0);
+			return ArrayListIterator(this, 0, false);
 		}
 
 		ArrayListIterator end()
 		{
-			return ArrayListIterator(this, mSize - 1);
+			return ArrayListIterator(this, mSize - 1 - 1, false);
 		}
 
 		ArrayListIterator rbegin()
 		{
-			return ArrayListIterator(this, mSize - 1);
+			return ArrayListIterator(this, mSize - 1 - 1, true);
 		}
 
 		ArrayListIterator rend()
 		{
-			return ArrayListIterator(this, 0);
+			return ArrayListIterator(this, 0, true);
 		}
 	};
 }

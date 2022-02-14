@@ -227,27 +227,56 @@ int main()
     //return RUN_ALL_TESTS();
 
     // The basic test program (for floats)
-    ArrayList<float> my_list;
-    my_list.append(1.1f);
-    my_list.append(2.2f);
-    my_list.append(3.3f);
+    ArrayList<float> flist;
+    flist.append(1.1f);
+    flist.append(2.2f);
+    flist.append(3.3f);
+    flist.append(4.4f);
 
-    //ArrayList<float> my_list4(moveFunction());  // Calls Move Constructor. This does  not seem to work in Release version?
-                // (SI also couldn't figure it out)
-    ArrayList<float> test(move(my_list));
-
-    ArrayList<float>::ArrayListIterator it(&my_list, 0);
+    // Iterator test
+    ArrayList<float>::ArrayListIterator it;
+    it = flist.begin();
     cout << *it << endl; // 1.1f;
-    it++;
-    cout << *it << endl; // 2.2f;
+    cout << "Normal iterator forward: " << *it << endl; // 2.2f
     it++;
     cout << *it << endl; // 3.3f
+    it++;
+    cout << *it << endl; // 3.3f
+    it++;
+    cout << *it << endl; // 3.3f
+    it++;
+    cout << *it << endl; // 3.3f
+    it++;
+    cout << *it << endl; // 3.
+    //
+    //// Reverse iterator test
+    //it = flist.rend();
+    //cout << *it << endl; // 3.3f
+    //it--;
+    //cout << "Reverse iterator backwards: " << *it << endl; // 2.2f
+    //it = flist.rbegin();
+    //cout << *it << endl; // 1.1f
 
-    cout << "Begin: " << *my_list.begin() << endl; // 1.1f;
-    cout << "End: " << *my_list.end() << endl; // 3.3f;
 
-    my_list.append(4.4f);
-    cout << "Added value 4.4" << endl;
-    cout << "End: " << *my_list.end() << endl; // 3.3f;
+    //cout << "Begin: " << *flist.begin() << endl; // 1.1f;
+    //cout << "End: " << *flist.end() << endl; // 3.3f;
+
+    //flist.append(4.4f);
+    //cout << "Added value 4.4" << endl;
+    //cout << "End: " << *flist.end() << endl; // 3.3f;
+
+    //cout << "output using for-each loop" << endl;
+    //cout << "==========================" << endl;
+    ////while (it != my_list.rend())
+    ////{
+    ////    cout << "Current value: " << *it << endl;
+    ////    it++;
+    ////}
+
+    //// Move constructor test
+    //    //ArrayList<float> my_list4(moveFunction());  // Calls Move Constructor. This does  not seem to work in Release version?
+    //            // (SI also couldn't figure it out)
+    //ArrayList<float> test(move(flist));
+
 
 }
