@@ -223,8 +223,8 @@ ArrayList<float> moveFunction()
 
 int main()
 {
-    testing::InitGoogleTest();
-    return RUN_ALL_TESTS();
+    //testing::InitGoogleTest();
+    //return RUN_ALL_TESTS();
 
     // The basic test program (for floats)
     ArrayList<float> flist;

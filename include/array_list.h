@@ -402,26 +402,12 @@ namespace ssuds
 
 			ArrayListIterator& operator++(int dummy)
 			{
-				if (mReversed) 
-				{
-					mCurPosition--;
-				}
-				else 
-				{
-					mCurPosition++;
-				}
+				mReversed ? mCurPosition-- : mCurPosition++;
 				return *this;
 			}
 			ArrayListIterator& operator++() 
 			{
-				if (mReversed)
-				{
-					mCurPosition--;
-				}
-				else
-				{
-					mCurPosition++;
-				}				
+				mReversed ? mCurPosition-- : mCurPosition++;
 				return *this;
 			}
 
