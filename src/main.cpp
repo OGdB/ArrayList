@@ -223,8 +223,8 @@ ArrayList<float> moveFunction()
 
 int main()
 {
-    //testing::InitGoogleTest();
-    //return RUN_ALL_TESTS();
+    testing::InitGoogleTest();
+    return RUN_ALL_TESTS();
 
     // The basic test program (for floats)
     ArrayList<float> flist;
@@ -232,51 +232,46 @@ int main()
     flist.append(2.2f);
     flist.append(3.3f);
     flist.append(4.4f);
+    cout << flist << endl;
 
     // Iterator test
     ArrayList<float>::ArrayListIterator it;
     it = flist.begin();
-    cout << *it << endl; // 1.1f;
+    cout << "First value: " << * it << endl; // 1.1f;
+    it++;
     cout << "Normal iterator forward: " << *it << endl; // 2.2f
     it++;
-    cout << *it << endl; // 3.3f
-    it++;
-    cout << *it << endl; // 3.3f
-    it++;
-    cout << *it << endl; // 3.3f
-    it++;
-    cout << *it << endl; // 3.3f
-    it++;
-    cout << *it << endl; // 3.
-    //
+    cout << *it << endl; // 2.2f
+
+
     //// Reverse iterator test
-    //it = flist.rend();
-    //cout << *it << endl; // 3.3f
-    //it--;
-    //cout << "Reverse iterator backwards: " << *it << endl; // 2.2f
-    //it = flist.rbegin();
-    //cout << *it << endl; // 1.1f
+    it = flist.rbegin();
+    cout << "rEnd: " << *it << endl; // 4.4f
+    it++;
+    cout << "Reverse iterator backwards: " << *it << endl; // 3.3f
+    it = flist.rbegin();
+    cout << "rBegin: " << * it << endl; // 1.1f
 
+    flist.append(5.5f);
+    cout << "Added value 5.5" << endl;
+    it = flist.end();
+    cout << "flist.end() = " << *it << endl; // 5.5f
 
-    //cout << "Begin: " << *flist.begin() << endl; // 1.1f;
-    //cout << "End: " << *flist.end() << endl; // 3.3f;
+    cout << "output using for-each loop" << endl;
+    cout << "from begin() to end()" << endl;
+    it = flist.begin();
+    cout << "==========================" << endl;
+    while (it != flist.end())
+    {
+        cout << "Current value: " << *it << endl;
+        it++;
+    }
 
-    //flist.append(4.4f);
-    //cout << "Added value 4.4" << endl;
-    //cout << "End: " << *flist.end() << endl; // 3.3f;
-
-    //cout << "output using for-each loop" << endl;
-    //cout << "==========================" << endl;
-    ////while (it != my_list.rend())
-    ////{
-    ////    cout << "Current value: " << *it << endl;
-    ////    it++;
-    ////}
-
-    //// Move constructor test
-    //    //ArrayList<float> my_list4(moveFunction());  // Calls Move Constructor. This does  not seem to work in Release version?
-    //            // (SI also couldn't figure it out)
-    //ArrayList<float> test(move(flist));
+    // Move constructor test
+        //ArrayList<float> my_list4(moveFunction());  // Calls Move Constructor. This does  not seem to work in Release version?
+                // (SI also couldn't figure it out)
+    cout << "Testing move constructor:" << endl;
+    ArrayList<float> test(move(flist));
 
 
 }

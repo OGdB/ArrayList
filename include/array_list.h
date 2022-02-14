@@ -50,7 +50,7 @@ namespace ssuds
 	/// <returns>a reference to the value at the given index</returns>
 	T& operator[](int index) const
 	{
-		if (index >= mSize || index < 0)
+		if (index >= mSize)
 			throw out_of_range("Invalid index: " + to_string(index));
 
 		return mData[index];
@@ -125,14 +125,14 @@ namespace ssuds
 		// Move constructor
 		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData)
 		{
-			cout << "I LIKE TO MOVE IT MOVE IT" << endl;
+			cout << "Move Constructor called" << endl;
 			other.mData = nullptr;
 		};
 
 		// Copy constructor
 		ArrayList(const ArrayList& other) : mCapacity(other.mCapacity), mSize(other.mSize)
 		{
-			cout << other << endl;
+			//cout << other << endl;
 			mData = new T[mCapacity];
 			for (int i = 0; i < other.size(); i++)
 				mData[i] = other[i];
@@ -353,19 +353,25 @@ namespace ssuds
 		}
 
 	public:
+
 		class ArrayListIterator
 		{
 		protected:
 			ArrayList* mArrayListPtr;
-			unsigned int mCurPosition; // current value of ArrayList
-			bool reversed;
-			// IT attributes
+			int mCurPosition; // current value of ArrayList
+			bool mReversed;
 		public:
-			ArrayListIterator(ArrayList* this_array = nullptr, int start_pos = 0, bool reversed = false)
+			ArrayListIterator()
+			{
+				mArrayListPtr = nullptr;
+				mCurPosition = -1;
+				mReversed = false;
+			}
+			ArrayListIterator(ArrayList* this_array, int start_pos, bool reversed = false)
 			{
 				mArrayListPtr = this_array;
 				mCurPosition = start_pos;
-				reversed = reversed;
+				mReversed = reversed;
 			}
 
 			/// @brief Check if this arraylistoperator points to the same value as another.
@@ -373,10 +379,18 @@ namespace ssuds
 			/// @return whether it points at the same value
 			bool operator!=(const ArrayListIterator& other)
 			{
-				if (*this == *other)
-					return !(mCurPosition == other.mCurPosition); // Not the same position
-				else
-					return false;
+				return (mArrayListPtr != other.mArrayListPtr ||
+					mCurPosition != other.mCurPosition ||
+					mReversed != other.mReversed);
+			}
+			/// @brief Are the iterators pointing at the same value?
+			/// @param other The other iterator
+			/// @return Whether the iterator are pointing at the same value
+			bool operator== (const ArrayListIterator& other)
+			{
+				return (mArrayListPtr != other.mArrayListPtr ||
+					mCurPosition != other.mCurPosition ||
+					mReversed != other.mReversed);
 			}
 
 			// Overload the dereference operator to return the T-value
@@ -386,37 +400,46 @@ namespace ssuds
 				return (*mArrayListPtr)[mCurPosition];
 			}
 
-			void operator++(int dummy)
+			ArrayListIterator& operator++(int dummy)
 			{
-				if (reversed)
+				if (mReversed) 
 				{
-					if (mCurPosition != 0)
-						mCurPosition--;
+					mCurPosition--;
 				}
 				else 
-				{
-					if (mCurPosition != mSize - 1)
-						mCurPosition++; // Advance the iterator using it++;
-				}
-			}
-			void operator--(int dummy)
-			{
-				if (reversed)
 				{
 					mCurPosition++;
 				}
-				else 
+				return *this;
+			}
+			ArrayListIterator& operator++() 
+			{
+				if (mReversed)
 				{
-					mCurPosition--; // Go backwards with the iterator
+					mCurPosition--;
 				}
+				else
+				{
+					mCurPosition++;
+				}				
+				return *this;
 			}
 
 			ArrayListIterator operator+(int offset)
 			{
 				// Create a new iterator which is offset elements
 				// from *our* current position
-				return ArrayListIterator(mArrayListPtr, mCurPosition + offset);
+				if (mReversed)
+				{
+					return ArrayListIterator(mArrayListPtr, mCurPosition - offset);
+
+				}
+				else
+				{
+					return ArrayListIterator(mArrayListPtr, mCurPosition + offset);
+				}
 			}
+
 		};
 
 		ArrayListIterator begin()
@@ -426,17 +449,17 @@ namespace ssuds
 
 		ArrayListIterator end()
 		{
-			return ArrayListIterator(this, mSize - 1 - 1, false);
+			return ArrayListIterator(this, mSize - 1, false);
 		}
 
 		ArrayListIterator rbegin()
 		{
-			return ArrayListIterator(this, mSize - 1 - 1, true);
+			return ArrayListIterator(this, mSize - 1, true);
 		}
 
 		ArrayListIterator rend()
 		{
-			return ArrayListIterator(this, 0, true);
+			return ArrayListIterator(this, -1, true);
 		}
 	};
 }
