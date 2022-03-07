@@ -12,9 +12,10 @@ namespace ssuds
 	protected:
 		/// The default (and minimum) capacity of an ArrayList
 		static const int msMinCapacity = 5;
-
+		int minCapacity;
 		/// The current number of "slots" AVAILABLE in mData (i.e. the array size)
 		int mCapacity;
+		bool customCapacity;
 
 		/// How many slots are we USING?  This will always be less than or equal to mCapacity
 		int mSize;
@@ -110,12 +111,12 @@ namespace ssuds
 
 	public:
 		/// Default constructor
-		ArrayList() : mSize(0), mCapacity(0), mData(nullptr)
+		ArrayList() : mSize(0), mCapacity(0), mData(nullptr), minCapacity(msMinCapacity), customCapacity(false)
 		{
 		};
 
 		// Initializer_list constructor
-		ArrayList(const initializer_list<T>& ilist) : mSize(0), mCapacity(0), mData(nullptr)
+		ArrayList(const initializer_list<T>& ilist) : mSize(0), mCapacity(0), mData(nullptr), minCapacity(msMinCapacity), customCapacity(false)
 		{
 			//cout << "Initializer list" << endl;
 			for (T val : ilist)
@@ -123,7 +124,7 @@ namespace ssuds
 		};
 
 		// Move constructor
-		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData)
+		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData), minCapacity(other.minCapacity), customCapacity(other.customCapacity)
 		{
 			cout << "Move Constructor called" << endl;
 			other.mData = nullptr;
@@ -274,6 +275,17 @@ namespace ssuds
 			return num_removed;
 		}
 
+		void remove_dups()
+		{
+			for (int i = 0; i < mSize – 1; i++)
+			{
+				for (int j = i + 1; j < mSize; j++)
+				{
+					if (mData[i] == mData[j])
+						remove(j);
+				}
+			}
+		}
 		/// <summary>
 		/// Returns the size of the internal array (i.e.) how many things are being stored in the ArrayList
 		/// </summary>
@@ -287,6 +299,12 @@ namespace ssuds
 		int capacity()
 		{
 			return mCapacity;
+		}
+		/// @brief Let the user set the capacity of the array
+		/// @param capacity 
+		void set_capacity(int capacity)
+		{
+			mCapacity = capacity
 		}
 
 	protected:
