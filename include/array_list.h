@@ -1,15 +1,9 @@
 #pragma once
 #include <string>
-
-// Note: in C++, a general tempate (like this one) must be defined inline
-// entirely in the .h file (no .cpp files).  So, in this lab, array_list.cpp
-// contents are moved here
-
 using namespace std;
 
 namespace ssuds
 {
-	/// An ArrayList is an array-based data structure. 
 	template <class T>
 	class ArrayList
 	{
@@ -151,7 +145,6 @@ namespace ssuds
 					return i;
 			}
 
-			// We didn't find it
 			return -1;
 		}
 

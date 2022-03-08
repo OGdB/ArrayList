@@ -3,17 +3,12 @@
 
 #include <iostream>
 #include <array_list.h>
+#include <linked_list.h>
 #include <gtest/gtest.h>
+#include <string>
 
 using namespace std;
 using namespace ssuds;
-
-ArrayList<float> moveFunction()
-{
-    ArrayList<float> this_list;
-    this_list.append(34.0f);
-    return this_list;
-}
 
 TEST(BasicTests, BasicTest01)
 {
@@ -25,29 +20,18 @@ TEST(BasicTests, BasicTest01)
 
 int main(int argc, char**argv)
 {
-    testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    /*testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();*/
+    LinkedList<int> test_list;
 
-    // The basic test program (for floats)
-    ArrayList<float> my_list;
-    my_list.append(1.1f);
-    my_list.append(1.2f);
-    my_list.append(1.3f);
-
-    ArrayList<float> my_list2;
-    my_list2.append(1.1f);
-    my_list2.append(1.2f);
-    my_list2.append(1.3f);
-
-    ArrayList<float> my_list3(my_list2);  // Copy Constructor
-    ArrayList<float> my_list4 = moveFunction();  // Move Constructor gets called
-    cout << my_list4[0] << endl;
-
-    ArrayList<float>::ArrayListIterator it(&my_list, 0);
-    it++;
-    float test_val = *it;
-    cout << test_val << endl;
-    test_val = *my_list.begin();
-    cout << test_val << endl;
-
+    test_list.append(3);
+    test_list.append(6);
+    test_list.append(9);
+    test_list.append(4);
+    test_list.append(2);
+    test_list.prepend(420);
+    cout << test_list[0] << endl;
+    cout << test_list << endl;
+    test_list.insert(3, 69);
+    cout << test_list << endl;
 }
