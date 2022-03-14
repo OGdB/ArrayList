@@ -20,11 +20,120 @@ namespace ssuds
 			}
 		};
 
+	public:
+		class LinkedListIterator
+		{
+		protected:
+			LinkedList& lili;
+			Node* current;
+			bool reverse;
+
+		public:
+			LinkedListIterator(LinkedList& lili) : lili(lili), current(lili.mStart), reverse(false)
+			{
+			}
+			LinkedListIterator(LinkedList& lili, bool at_end) : lili(lili), current(at_end ? lili.mEnd->mNext : lili.mStart)
+			{
+			}
+			LinkedListIterator(LinkedList& lili, bool at_end, bool reversed) : lili(lili), current(at_end ? lili.mEnd : lili.mStart->mPrev), reverse(reversed)
+			{
+			}
+			LinkedListIterator(LinkedList& lili, Node* start_node) : lili(lili), current(start_node), reverse(false)
+			{
+			}
+
+			bool operator!=(const LinkedListIterator& other)
+			{
+				return current != other.current;
+			}
+			bool operator==(const LinkedListIterator& other)
+			{
+				return current == other.current;
+			}
+
+			T& operator*()
+			{
+				if (current == nullptr)
+				{
+					throw runtime_error("Current is a nullpointer");
+				}
+
+				return current->mData;
+			}
+			
+			void operator++()
+			{
+				if (!reverse)
+					current = current->mNext;
+				else
+					current = current->mPrev;
+			}
+			void operator++(int dummy)
+			{
+				if (!reverse)
+					current = current->mNext;
+				else
+					current = current->mPrev;
+			}
+
+			/// @brief Get the spot at which the current node is in the linked list.
+			/// @return The index at which the current node is in the linked list.
+			int index()
+			{
+				Node* cur_node = lili.mStart;
+				int cur_index = 0;
+
+				// Loop through the entire linked list until the current node is found.
+				while (cur_node != nullptr && current != cur_node)
+				{
+					cur_node = cur_node->mNext;
+					cur_index++;
+				}
+
+				return cur_index;
+			}
+		};
+
+		LinkedListIterator begin()
+		{
+			return LinkedListIterator(*this);
+		}
+		LinkedListIterator end()
+		{
+			return LinkedListIterator(*this, true);
+		}
+		LinkedListIterator rbegin()
+		{
+			return LinkedListIterator(*this, true, true);
+		}
+		LinkedListIterator rend()
+		{
+			return LinkedListIterator(*this, false, true);
+		}
+
+		/// @brief Find the first instance of a value in the Linked List.
+		/// @param value The value to find in the Linked List.
+		/// @return LinkedListIterator spot at which value is found. End of Iterator if value is not found.
+		LinkedListIterator find(T value)
+		{
+			Node* cur_node = mStart;
+
+			// Loop through the entire linked list until element is found.
+			while (cur_node != nullptr && cur_node->mData != value)
+			{
+				cur_node = cur_node->mNext;
+			}
+
+			if (cur_node == nullptr)
+				return LinkedListIterator(*this, mEnd);
+
+			return LinkedListIterator(*this, cur_node);
+		}
+
 		Node* mStart; // First element of LinkedList
 		Node* mEnd; // Last element of LinkedList
 		int mSize; // Amount of elements in LinkedList
 
-	public:
 		/// CONSTRUCTORS ///
 		LinkedList() : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
@@ -44,14 +153,14 @@ namespace ssuds
 		// Move-Constructor
 		LinkedList(LinkedList&& other) : mStart(other.mStart), mEnd(other.mEnd), mSize(other.mSize)
 		{
-			cout << "I LIKE TO MOVE IT MOVE IT" << endl;
+			cout << "Move constructor called!" << endl;
 			other.mStart = nullptr;
 			other.mEnd = nullptr;
 		};
 		// Initializer-List-Constructor
 		LinkedList(const initializer_list<T>& ilist)
 		{
-			cout << "INITIALIZING" << endl;
+			cout << "Initializer called!" << endl;
 
 			for (T val : ilist)
 			{
@@ -90,6 +199,7 @@ namespace ssuds
 			}
 
 			os << "]";
+
 			return os;
 		}
 
@@ -119,19 +229,28 @@ namespace ssuds
 			Node* prev_node = node_to_remove->mPrev;
 			Node* next_node = node_to_remove->mNext;
 
-			if (index == 0)
+			if (node_to_remove == mStart)
 				mStart = next_node;
-			if (index == mSize - 1)
+			if (node_to_remove == mEnd)
 				mEnd = prev_node;
 
-			if (prev_node != nullptr)
-				prev_node->mNext = next_node;
-			if (next_node != nullptr)
-				next_node->mPrev = prev_node;
+			disconnect_node(node_to_remove);
 
 			delete node_to_remove;
 		}
-	
+		/// @brief Remove the value at which the iterator finds itself
+		/// @param The iterator
+		/// @return The value right of the iterator
+		LinkedListIterator remove(LinkedListIterator it)
+		{
+			LinkedListIterator next_it = it;
+			next_it++;
+
+			int iterator_index = it.index();
+			remove(iterator_index);
+
+			return next_it;
+		}
 		void prepend(const T& new_val)
 		{
 			Node* new_node = new Node(new_val);
@@ -166,6 +285,12 @@ namespace ssuds
 				return;
 			}
 
+			if (spot > mSize || spot < 0)
+			{
+				throw out_of_range("Invalid index: " + to_string(spot));
+				return;
+			}
+
 			// spot is somewhere in middle
 			Node* new_node = new Node(new_val);
 			Node* cur_node = get_node_at_index(spot);
@@ -178,21 +303,12 @@ namespace ssuds
 			cur_node->mPrev = new_node;
 
 			mSize++;
-			// invalid index
-
 		}
-
-		//void clear()
-		//{
-		//	Node* cur_node = mStart;
-
-		//	while (cur_val != nullptr)
-		//	{
-		//		Node* next_node = cur_node.mNext;
-		//		cur_node.clear();
-		//		cur_node = next_node;
-		//	}
-		//}
+		void insert(LinkedListIterator& it, const T& new_val)
+		{
+			int spot = it.index();
+			insert(spot, new_val);
+		}
 
 		int size()
 		{
@@ -214,114 +330,15 @@ namespace ssuds
 
 			return cur_node;
 		}
-
-		class LinkedListIterator
+		void disconnect_node(Node* node)
 		{
-		protected:
-			LinkedList& lili;
-			Node* current;
-			bool reverse;
+			Node* prev_node = node->mPrev;
+			Node* next_node = node->mNext;
 
-		public:
-			LinkedListIterator(LinkedList& lili) : lili(lili), current(lili.mStart), reverse(false)
-			{
-			}
-			LinkedListIterator(LinkedList& lili, bool at_end) : lili(lili), current(at_end ? lili.mEnd->mNext : lili.mStart)
-			{
-			}
-			LinkedListIterator(LinkedList& lili, bool at_end, bool reversed) : lili(lili), current(at_end ? lili.mEnd : lili.mStart->mPrev), reverse(reversed)
-			{
-			}
-			LinkedListIterator(LinkedList& lili, Node* start_node) : lili(lili), current(start_node), reverse(false)
-			{
-			}
-
-			bool operator!=(const LinkedListIterator& other) 
-			{
-				return current != other.current;
-			}
-			bool operator==(const LinkedListIterator& other)
-			{
-				return current == other.current;
-			}
-
-			T& operator*() 
-			{
-				if (current == nullptr)
-				{
-					throw runtime_error("Current is a nullpointer");
-				}
-
-				return current->mData;
-			}
-
-			void operator++()
-			{
-				if (!reverse)
-					current = current->mNext;
-				else
-					current = current->mPrev;
-			}
-			void operator++(int dummy)
-			{
-				if (!reverse)
-					current = current->mNext;
-				else
-					current = current->mPrev;
-			}
-			/// @brief Get the spot at which the current node is in the linked list.
-			/// @return The index at which the current node is in the linked list.
-			int index()
-			{
-				Node* cur_node = lili.mStart;
-				int cur_index = 0;
-
-				// Loop through the entire linked list until the current node is found.
-				while (cur_node != nullptr && current != cur_node)
-				{
-					cur_node = cur_node->mNext;
-					cur_index++;
-				}
-
-				return cur_index;
-			}
-		};
-
-
-		LinkedListIterator begin()
-		{
-			return LinkedListIterator(*this);
-		}
-		LinkedListIterator end()
-		{
-			return LinkedListIterator(*this, true);
-		}
-		LinkedListIterator rbegin()
-		{
-			return LinkedListIterator(*this, true, true);
-		}
-		LinkedListIterator rend()
-		{
-			return LinkedListIterator(*this, false, true);
-		}
-
-		/// @brief Find a value in the Linked List.
-		/// @param value The value to find in the Linked List.
-		/// @return LinkedListIterator at which value is found. End of Iterator if value is not found.
-		LinkedListIterator find(T value)
-		{
-			Node* cur_node = mStart;
-
-			// Loop through the entire linked list until element is found.
-			while (cur_node != nullptr && cur_node->mData != value)
-			{
-				cur_node = cur_node->mNext;
-			}
-
-			if (cur_node == nullptr)
-				return LinkedListIterator(*this, mEnd);
-
-			return LinkedListIterator(*this, cur_node);
+			if (prev_node != nullptr)
+				prev_node->mNext = next_node;
+			if (next_node != nullptr)
+				next_node->mPrev = prev_node;
 		}
 	};
  }

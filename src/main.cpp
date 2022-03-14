@@ -10,13 +10,6 @@
 using namespace std;
 using namespace ssuds;
 
-TEST(BasicTests, BasicTest01)
-{
-    int x = 47;
-    int y = 47;
-    EXPECT_EQ(x, y) << "Not equal!";
-}
-
 LinkedList<int> func()
 {
     LinkedList<int> mList;
@@ -32,8 +25,8 @@ LinkedList<int> func()
 
 int main(int argc, char**argv)
 {
-    /*testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();*/
+    //testing::InitGoogleTest(&argc, argv);
+    //return RUN_ALL_TESTS();
     
     LinkedList<int> mList;
 
@@ -46,32 +39,30 @@ int main(int argc, char**argv)
     // cout << mList << endl; // [3, 6, 9, 4, 2]
 
     mList.prepend(420);
-    // cout << mList[0] << endl; // 420
-    // cout << mList << endl; // [420, 3, 6, 9, 4, 2]
 
-    //mList.insert(3, 69);
-    // cout << mList[3] << endl; // 69
-
-    // cout << mList << endl << endl; // [420, 3, 6, 69, 9, 4, 2]
-
-    //cout << "Pretty loop through list:" << endl;
+    cout << "Getting iterator at begin()..:" << endl;
     LinkedList<int>::LinkedListIterator it = mList.begin();
+    cout << "Iterator value: " << *it << endl;
+    cout << "Using remove function with iterator-parameter...\n";
+    LinkedList<int>::LinkedListIterator it2 = mList.remove(it);
+    cout << "Iterator value: " << *it2 << endl;
 
-   /* for (int number : mList)
-    {
-        cout << number << endl;
-    }*/
-
-    cout << mList << endl;
     // Copy constructor //
     LinkedList<int> mList2 = mList;
-    cout << mList2 << endl;
+    cout << "\nCopying previous linked list..\n" <<
+        mList2 << endl;
 
     // Find method
     LinkedList<int>::LinkedListIterator findit = mList.find(3);
+    cout << "\nTrying to find value 3.." << "\nValue found: " << *findit << " at index: " << findit.index() << endl << endl;
 
-    // MOVE CONSTRUCTOR //
-    cout << endl << *findit << endl;
+    cout << "Insert Function\n";
+    cout << "Current iterator Spot/Index: " << findit.index() << endl;
+    cout << "Adding value 5 at iterator location...\n";
+    mList.insert(findit, 5);
+    cout << mList << endl << endl;
+
+    // MOVE CONSTRUCTOR
     LinkedList<int> mList3 = func();
     cout << mList3 << endl;
 
