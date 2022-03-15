@@ -1,3 +1,6 @@
+// Define a Macro. 1 == True, 0 == False
+#define EXECUTE_LINKED_LIST_TESTS 1
+
 #include <iostream>
 #include <array_list.h>
 #include <linked_list.h>
@@ -7,7 +10,7 @@
 using namespace std;
 using namespace ssuds;
 
-#define EXECUTE_LINKED_LIST_TESTS 1
+// If the Macro is defined with 'True' or 'False' > '1' or '0'
 #if EXECUTE_LINKED_LIST_TESTS
 
 class LinkedListFixture : public ::testing::Test
@@ -27,9 +30,9 @@ protected:
 		mList.append(6);
 	}
 
-	void TearDown() override
+	/*void TearDown() override
 	{
-	}
+	}*/
 };
 
 TEST_F(LinkedListFixture, InitiallyEmpty)
