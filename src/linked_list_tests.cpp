@@ -14,7 +14,7 @@ class LinkedListFixture : public ::testing::Test
 {
 protected:
 	LinkedList<int> mList;
-	LinkedList<int> slist1;
+	LinkedList<int> mList2;
 
 	void SetUp() override
 	{
@@ -34,7 +34,7 @@ protected:
 
 TEST_F(LinkedListFixture, InitiallyEmpty)
 {
-	EXPECT_EQ(slist1.size(), 0);
+	EXPECT_EQ(mList2.size(), 0);
 }
 
 TEST_F(LinkedListFixture, AddingItems)
@@ -74,9 +74,9 @@ TEST_F(LinkedListFixture, ClearItems)
 	EXPECT_EQ(mList.size(), 0);
 
 	// Trying to clear already empty list
-	EXPECT_EQ(slist1.size(), 0);
-	slist1.clear(); 
-	EXPECT_EQ(slist1.size(), 0);
+	EXPECT_EQ(mList2.size(), 0);
+	mList2.clear(); 
+	EXPECT_EQ(mList2.size(), 0);
 }
 
 TEST_F(LinkedListFixture, ManualForwardIteration)
@@ -194,7 +194,7 @@ TEST_F(LinkedListFixture, PrettyIteration)
 TEST_F(LinkedListFixture, OS_Stream)
 {
 	stringstream ss;
-	ss << slist1;
+	ss << mList2;
 	EXPECT_EQ(ss.str(), "[]");
 	ss.str(string());
 	ss << mList;
