@@ -20,7 +20,7 @@ namespace ssuds
 			}
 		};
 
-#pragma region Iterator
+#pragma region ITERATOR
 	public:
 		class LinkedListIterator
 		{
@@ -129,7 +129,7 @@ namespace ssuds
 		/// @brief Find the first instance of a value in the Linked List.
 		/// @param value The value to find in the Linked List.
 		/// @return LinkedListIterator spot at which value is found. End of Iterator if value is not found.
-		LinkedListIterator find(T value)
+		LinkedListIterator find(const T value)
 		{
 			Node* cur_node = mStart;
 
@@ -146,11 +146,12 @@ namespace ssuds
 		}
 #pragma endregion
 
+		// LINKED_LIST ATTRIBUTES
 		Node* mStart; // First element of LinkedList
 		Node* mEnd; // Last element of LinkedList
 		int mSize; // Amount of elements in LinkedList
 
-#pragma region Constructors
+#pragma region CONSTRUCTORS
 		LinkedList() : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
 		}
@@ -187,7 +188,7 @@ namespace ssuds
 		}
 #pragma endregion
 
-#pragma region Overrides
+#pragma region OPERATOR_OVERRIDES
 		T& operator[](int index)
 		{
 			Node* node = get_node_at_index(index);
@@ -233,7 +234,7 @@ namespace ssuds
 		}
 #pragma endregion
 
-#pragma region Top-Level-Functionality
+#pragma region TOP_LEVEL_FUNCTIONALITIES
 		/// @brief Inserts a new element at the end of the array
 		/// @param new_val the new value to add
 		void append(const T& new_val)
@@ -298,10 +299,10 @@ namespace ssuds
 		/// @brief Remove the value at which the iterator finds itself
 		/// @param The iterator
 		/// @return The value right of the iterator
-		LinkedListIterator remove(LinkedListIterator it)
+		LinkedListIterator* remove(LinkedListIterator* it)
 		{
-			int index = it.index();
-			++it;
+			int index = it->index();
+			*it++;
 
 			remove(index);
 
@@ -377,12 +378,13 @@ namespace ssuds
 
 		/// @brief Get the amount of elements in the Linked List
 		/// @return The amount of elements in the Linked List
-		int size()
+		int size() const
 		{
 			return mSize;
 		}
 #pragma endregion
 
+		// Utility
 		protected:
 		/// @brief Return the Node at the specified index
 		/// @param index the index to retrieve the node of

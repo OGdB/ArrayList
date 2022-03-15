@@ -60,7 +60,7 @@ TEST_F(LinkedListFixture, RemoveItem)
 	// Remove with LinkedList Iterator as argument and returned:
 	LinkedList<int>::LinkedListIterator it = mList.begin();
 	it++;
-	mList.remove(it); // Remove second index (1)
+	mList.remove(&it); // Remove second index (1)
 	EXPECT_EQ(mList.size(), 5);
 	EXPECT_EQ(mList[0], 1);
 	EXPECT_EQ(mList[1], 3);
@@ -70,9 +70,15 @@ TEST_F(LinkedListFixture, RemoveItem)
 
 TEST_F(LinkedListFixture, ClearItems)
 {
+	// Clearing filled list
 	EXPECT_EQ(mList.size(), 7);
 	mList.clear();
 	EXPECT_EQ(mList.size(), 0);
+
+	// Trying to clear already empty list
+	EXPECT_EQ(slist1.size(), 0);
+	slist1.clear(); 
+	EXPECT_EQ(slist1.size(), 0);
 }
 
 TEST_F(LinkedListFixture, ManualForwardIteration)
