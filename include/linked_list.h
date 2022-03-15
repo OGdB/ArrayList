@@ -278,6 +278,13 @@ namespace ssuds
 			Node* prev_node = node_to_remove->mPrev;
 			Node* next_node = node_to_remove->mNext;
 
+			// Change mPrev's mNext & mNext's mPrev
+			if (next_node != nullptr)
+				next_node->mPrev = prev_node;
+			if (prev_node != nullptr)
+				prev_node->mNext = next_node;
+
+			// Change mStart/mEnd if necessary
 			if (node_to_remove == mStart)
 				mStart = next_node;
 			if (node_to_remove == mEnd)

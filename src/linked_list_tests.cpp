@@ -53,20 +53,19 @@ TEST_F(LinkedListFixture, RemoveItem)
 	EXPECT_EQ(mList.size(), 7);
 	
 	// 'Normal' Remove with spot/index:
-	mList.remove(0);
+	mList.remove(0); // Remove index 0 (mData 0)
 	EXPECT_EQ(mList.size(), 6);
 	EXPECT_EQ(mList[0], 1);
 
 	// Remove with LinkedList Iterator as argument and returned:
 	LinkedList<int>::LinkedListIterator it = mList.begin();
-	//it++;
-	//mList.remove(it); // Remove second index (1)
-	//EXPECT_EQ(mList.size(), 5);
-	//EXPECT_EQ(mList[0], 1);
-	//EXPECT_EQ(mList[1], 3);
-	//EXPECT_EQ(mList[2], 4);
-	//EXPECT_EQ(mList[3], 5);
-
+	it++;
+	mList.remove(it); // Remove second index (1)
+	EXPECT_EQ(mList.size(), 5);
+	EXPECT_EQ(mList[0], 1);
+	EXPECT_EQ(mList[1], 3);
+	EXPECT_EQ(mList[2], 4);
+	EXPECT_EQ(mList[3], 5);
 }
 
 TEST_F(LinkedListFixture, ClearItems)
