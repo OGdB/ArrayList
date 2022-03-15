@@ -72,11 +72,11 @@ namespace ssuds
 		ArrayList() : mSize(0), mCapacity(0), mData(nullptr)
 		{
 		};
+		// Initializer constructor
 		ArrayList(const initializer_list<T>& ilist) : mSize(0), mCapacity(0), mData(nullptr)
 		{
-			// intentionally empty
 			for (T val : ilist)
-				append.val;
+				append(val);
 		};
 		ArrayList(ArrayList&& other) : mSize(other.mSize), mCapacity(other.mCapacity), mData(other.mData)
 		{

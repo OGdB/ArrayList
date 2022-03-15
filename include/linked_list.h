@@ -20,6 +20,7 @@ namespace ssuds
 			}
 		};
 
+#pragma region Iterator
 	public:
 		class LinkedListIterator
 		{
@@ -32,7 +33,7 @@ namespace ssuds
 			LinkedListIterator(LinkedList& lili) : lili(lili), current(lili.mStart), reverse(false)
 			{
 			}
-			LinkedListIterator(LinkedList& lili, bool at_end) : lili(lili), current(at_end ? lili.mEnd->mNext : lili.mStart)
+			LinkedListIterator(LinkedList& lili, bool at_end) : lili(lili), current(at_end ? lili.mEnd->mNext : lili.mStart), reverse(false)
 			{
 			}
 			LinkedListIterator(LinkedList& lili, bool at_end, bool reversed) : lili(lili), current(at_end ? lili.mEnd : lili.mStart->mPrev), reverse(reversed)
@@ -42,11 +43,11 @@ namespace ssuds
 			{
 			}
 
-			bool operator!=(const LinkedListIterator& other)
+			bool operator!=(const LinkedListIterator& other) const
 			{
 				return current != other.current;
 			}
-			bool operator==(const LinkedListIterator& other)
+			bool operator==(const LinkedListIterator& other) const
 			{
 				return current == other.current;
 			}
@@ -74,6 +75,20 @@ namespace ssuds
 					current = current->mNext;
 				else
 					current = current->mPrev;
+			}
+			void operator--()
+			{
+				if (!reverse)
+					current = current->mPrev;
+				else
+					current = current->mNext;
+			}
+			void operator--(int dummy)
+			{
+				if (!reverse)
+					current = current->mPrev;
+				else
+					current = current->mNext;
 			}
 
 			/// @brief Get the spot at which the current node is in the linked list.
@@ -124,44 +139,42 @@ namespace ssuds
 				cur_node = cur_node->mNext;
 			}
 
-			if (cur_node == nullptr)
+			if (cur_node == nullptr || cur_node->mData != value)
 				return LinkedListIterator(*this, mEnd);
 
 			return LinkedListIterator(*this, cur_node);
 		}
+#pragma endregion
 
 		Node* mStart; // First element of LinkedList
 		Node* mEnd; // Last element of LinkedList
 		int mSize; // Amount of elements in LinkedList
 
-		/// CONSTRUCTORS ///
+#pragma region Constructors
 		LinkedList() : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
 		}
 		// Copy-Constructor
-		LinkedList(const LinkedList& other) : mStart(other.mStart), mEnd(other.mEnd), mSize(other.mSize)
+		LinkedList(const LinkedList& other) : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
-			LinkedList<T> copy_list;
-			Node* cur_node = mStart;
+			Node* cur_node = other.mStart; // Loop though the other array
 
 			while (cur_node != nullptr)
 			{
-				copy_list.append(cur_node->mData);
+				append(cur_node->mData);
 				cur_node = cur_node->mNext;
 			}
 		}
 		// Move-Constructor
 		LinkedList(LinkedList&& other) : mStart(other.mStart), mEnd(other.mEnd), mSize(other.mSize)
 		{
-			cout << "Move constructor called!" << endl;
+			//cout << "Move constructor called!" << endl;
 			other.mStart = nullptr;
 			other.mEnd = nullptr;
 		};
 		// Initializer-List-Constructor
-		LinkedList(const initializer_list<T>& ilist)
+		LinkedList(const initializer_list<T>& ilist) : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
-			cout << "Initializer called!" << endl;
-
 			for (T val : ilist)
 			{
 				append(val);
@@ -170,15 +183,31 @@ namespace ssuds
 
 		~LinkedList()
 		{
-			// Need to clear every node (clear function)
+			clear();
 		}
+#pragma endregion
 
-		// OVERRIDES
+#pragma region Overrides
 		T& operator[](int index)
 		{
 			Node* node = get_node_at_index(index);
 
 			return node->mData;
+		}
+
+		LinkedList<T>& operator= (const LinkedList<T>& other)
+		{
+			clear();
+
+			Node* cur_node = other.mStart;
+
+			while (cur_node != nullptr)
+			{
+				append(cur_node->mData);
+				cur_node = cur_node->mNext;
+			}
+
+			return *this;
 		}
 
 		friend ostream& operator<<(ostream& os, const LinkedList<T>& linked_list)
@@ -202,9 +231,9 @@ namespace ssuds
 
 			return os;
 		}
+#pragma endregion
 
-		//////// TOP_LEVEL FUNCTIONS
-
+#pragma region Top-Level-Functionality
 		/// @brief Inserts a new element at the end of the array
 		/// @param new_val the new value to add
 		void append(const T& new_val)
@@ -221,8 +250,28 @@ namespace ssuds
 				mEnd = new_node; // new end_val = new_val
 			}
 
-			mSize += 1; // Size increased
+			mSize++; // Size increased
 		}
+
+		/// @brief Empty the entire Linked List
+		void clear()
+  		{
+			Node* cur_node = mStart;
+
+			while (cur_node != nullptr)
+			{
+				Node* next = cur_node->mNext;
+				delete cur_node;
+				cur_node = next;
+			}
+
+			mStart = nullptr;
+			mEnd = nullptr;
+			mSize = 0;
+		}
+
+		/// @brief Remove an element from the Linked List
+		/// @param index The index of the value to remove
 		void remove(int index)
 		{
 			Node* node_to_remove = get_node_at_index(index);
@@ -234,23 +283,26 @@ namespace ssuds
 			if (node_to_remove == mEnd)
 				mEnd = prev_node;
 
-			disconnect_node(node_to_remove);
+			mSize--;
 
 			delete node_to_remove;
 		}
+
 		/// @brief Remove the value at which the iterator finds itself
 		/// @param The iterator
 		/// @return The value right of the iterator
-		LinkedListIterator remove(LinkedListIterator it)
+		LinkedListIterator remove(LinkedListIterator& it)
 		{
-			LinkedListIterator next_it = it;
-			next_it++;
+			int index = it.index();
+			it++;
 
-			int iterator_index = it.index();
-			remove(iterator_index);
+			remove(index);
 
-			return next_it;
+			return it;
 		}
+
+		/// @brief Add a value at the beginning of the Linked List
+		/// @param new_val The value to add
 		void prepend(const T& new_val)
 		{
 			Node* new_node = new Node(new_val);
@@ -264,9 +316,12 @@ namespace ssuds
 				mStart = new_node;
 			}
 
-			mSize += 1; // Size increased
+			mSize++; // Size increased
 		}
 
+		/// @brief Insert a value at a specified spot in the Linked List
+		/// @param spot The index to insert the value at
+		/// @param new_val The value to insert
 		void insert(int spot, const T& new_val)
 		{
 			if (mSize == 0)
@@ -304,17 +359,27 @@ namespace ssuds
 
 			mSize++;
 		}
+		/// @brief Insert a value at a specified spot in the Linked List
+		/// @param it The iteration value to insert the value at
+		/// @param new_val The value to insert
 		void insert(LinkedListIterator& it, const T& new_val)
 		{
 			int spot = it.index();
 			insert(spot, new_val);
 		}
 
+		/// @brief Get the amount of elements in the Linked List
+		/// @return The amount of elements in the Linked List
 		int size()
 		{
 			return mSize;
 		}
+#pragma endregion
 
+		protected:
+		/// @brief Return the Node at the specified index
+		/// @param index the index to retrieve the node of
+		/// @return The node at the specified index
 		Node* get_node_at_index(int index)
 		{
 			if (index >= mSize || index < 0)
@@ -329,16 +394,6 @@ namespace ssuds
 			}
 
 			return cur_node;
-		}
-		void disconnect_node(Node* node)
-		{
-			Node* prev_node = node->mPrev;
-			Node* next_node = node->mNext;
-
-			if (prev_node != nullptr)
-				prev_node->mNext = next_node;
-			if (next_node != nullptr)
-				next_node->mPrev = prev_node;
 		}
 	};
  }
