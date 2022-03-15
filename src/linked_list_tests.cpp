@@ -15,7 +15,6 @@ class LinkedListFixture : public ::testing::Test
 protected:
 	LinkedList<int> mList;
 	LinkedList<int> slist1;
-	LinkedList<int> slist2;
 
 	void SetUp() override
 	{
@@ -36,7 +35,6 @@ protected:
 TEST_F(LinkedListFixture, InitiallyEmpty)
 {
 	EXPECT_EQ(slist1.size(), 0);
-	EXPECT_EQ(slist2.size(), 0);
 }
 
 TEST_F(LinkedListFixture, AddingItems)
