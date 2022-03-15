@@ -59,9 +59,9 @@ TEST_F(LinkedListFixture, RemoveItem)
 
 	// Remove with LinkedList Iterator as argument and returned:
 	LinkedList<int>::LinkedListIterator it = mList.begin();
-	//it++;
-	//mList.remove(it); // Remove second index (1)
-	//EXPECT_EQ(mList.size(), 5);
+	it++;
+	mList.remove(it); // Remove second index (1)
+	EXPECT_EQ(mList.size(), 5);
 	//EXPECT_EQ(mList[0], 1);
 	//EXPECT_EQ(mList[1], 3);
 	//EXPECT_EQ(mList[2], 4);

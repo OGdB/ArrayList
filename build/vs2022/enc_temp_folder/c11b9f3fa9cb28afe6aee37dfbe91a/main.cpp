@@ -10,8 +10,18 @@
 using namespace std;
 using namespace ssuds;
 
-// TODO:
-// FIX REMOVE FUNCTION WITH ITERATOR ARGUMENT
+//LinkedList<int> func()
+//{
+//    LinkedList<int> mList;
+//
+//    mList.append(69);
+//    mList.append(69);
+//    mList.append(69);
+//    mList.append(69);
+//    mList.append(69);
+//
+//    return mList;
+//}
 
 int main(int argc, char**argv)
 {

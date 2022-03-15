@@ -291,10 +291,10 @@ namespace ssuds
 		/// @brief Remove the value at which the iterator finds itself
 		/// @param The iterator
 		/// @return The value right of the iterator
-		LinkedListIterator remove(LinkedListIterator& it)
+		LinkedListIterator remove(LinkedListIterator it)
 		{
 			int index = it.index();
-			it++;
+			++it;
 
 			remove(index);
 
