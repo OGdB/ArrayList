@@ -106,7 +106,6 @@ namespace ssuds
 				set.mRoot->print_recursive(&returned_set);
 
 			os << returned_set;
-
 			return os;
 		}
 #pragma endregion
