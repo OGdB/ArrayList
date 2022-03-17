@@ -17,9 +17,7 @@ namespace ssuds
 			Node* mLeft;
 			Node* mRight;
 
-			Node(const T& val) : mData(val), mLeft(nullptr), mRight(nullptr)
-			{
-			}
+			Node(const T& val) : mData(val), mLeft(nullptr), mRight(nullptr) {}
 
 			int insert_recursive(const T& val)
 			{
@@ -48,7 +46,7 @@ namespace ssuds
 					{
 						return mRight->insert_recursive(val);
 					}
-					else 
+					else
 					{
 						mRight = new Node(val);
 						return 1;
@@ -60,6 +58,20 @@ namespace ssuds
 				return 0;
 			}
 
+			bool contains_recursive(const T& val)
+			{
+				if (mData == val)
+					return true;
+				else
+				{
+					if (mLeft != nullptr && mData > val) // if this node's value is bigger than the node we look for, go left (to smaller value)
+						return mLeft->contains_recursive(val);
+					else if (mRight != nullptr && mData < val) // if bigger, go right.
+						return mRight->contains_recursive(val);
+				}
+
+				return false; // Else the value is not there.
+			}
 			void print_recursive(ArrayList<string>* returned_set)
 			{
 				// Add this value to returned set..
@@ -85,7 +97,43 @@ namespace ssuds
 			// super-important!!
 		}
 
-		// The user is calling this method
+#pragma region OPERATOR_OVERRIDES
+		friend ostream& operator<<(ostream& os, const OrderedSet<T>& set)
+		{
+			ArrayList<string> returned_set;
+
+			if (set.mRoot)
+				set.mRoot->print_recursive(&returned_set);
+
+			os << returned_set;
+
+			return os;
+		}
+#pragma endregion
+
+#pragma region TOP_LEVEL_FUNCTIONALITIES
+		void clear()
+		{
+
+		}
+
+		/// @brief Look in the set for a value
+		/// @param val The value to look for
+		/// @return Whether the value is found in the set
+		bool contains(const T& val)
+		{
+			if (mRoot == nullptr)
+			{
+				return false;
+			}
+			else
+			{
+				mRoot->contains_recursive(val);
+			}
+		}
+
+		/// @brief Add value to the set.
+		/// @param val The value to add
 		void insert(const T& val)
 		{
 			if (mRoot)
@@ -101,14 +149,12 @@ namespace ssuds
 			}
 		}
 
-		ArrayList<string> print_all()
+		/// @brief Get the amount of elements in the set
+		/// @return The amount of elements in the set
+		int size() const
 		{
-			ArrayList<string> returned_set;
-
-			if (mRoot)
-				mRoot->print_recursive(&returned_set);
-
-			return returned_set;
+			return mSize;
 		}
+#pragma endregion
 	};
 }

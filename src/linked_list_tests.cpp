@@ -1,5 +1,5 @@
 // Define a Macro. 1 == True, 0 == False
-#define EXECUTE_LINKED_LIST_TESTS 1
+#define EXECUTE_LINKED_LIST_TESTS 0
 
 #include <iostream>
 #include <array_list.h>

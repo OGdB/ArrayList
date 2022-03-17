@@ -13,6 +13,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\linked_list_tests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
+    <ClCompile Include="..\..\src\ordered_set_tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\array_list.h" />
