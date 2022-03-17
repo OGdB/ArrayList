@@ -20,9 +20,5 @@ int main(int argc, char**argv)
     mList.insert(4);
     mList.insert(5);
 
-    cout << mList << endl;
-
-    mList.clear();
-
     cout << mList << endl;*/
 }
