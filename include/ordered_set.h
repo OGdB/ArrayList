@@ -28,7 +28,7 @@ namespace ssuds
 					// The value is less than me, so it should
 					// go to my left.
 					// Two sub-posibilities: 
-					if (mLeft)
+					if (mLeft != nullptr)
 					{
 						//    we have a left child -- it should be
 						//       told to handle the rest of insert
@@ -44,15 +44,20 @@ namespace ssuds
 				}
 				else if (val > mData)
 				{
-					// The value is greater than me, so it should
-					// go to my right.
+					if (mRight != nullptr)
+					{
+						return mRight->insert_recursive(val);
+					}
+					else 
+					{
+						mRight = new Node(val);
+						return 1;
+					}
 				}
-				else
-				{
-					// The value is equal to me -- duplicate!!
-					// nothing to do...or is there?
-					return 0;
-				}
+
+				// The value is equal to me -- duplicate!!
+				// nothing to do...or is there?
+				return 0;
 			}
 
 			void print_recursive(ArrayList<string>* returned_set)
