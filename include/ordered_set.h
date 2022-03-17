@@ -127,6 +127,7 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONALITIES
+		/// @brief Clear the entire set
 		void clear()
 		{
 			if (mRoot != nullptr)
