@@ -13,15 +13,16 @@ int main(int argc, char**argv)
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 
-    //OrderedSet<int> mList;
-    //mList.insert(1);
-    //mList.insert(2);
-    //mList.insert(3);
-    //mList.insert(4);
-    //mList.insert(5);
+    /*OrderedSet<int> mList;
+    mList.insert(1);
+    mList.insert(2);
+    mList.insert(3);
+    mList.insert(4);
+    mList.insert(5);
 
-    //cout << "Does mList contain 3?\n";
-    //cout << mList.contains(3) << "!\n";
+    cout << mList << endl;
 
-    //cout << mList << endl;
+    mList.clear();
+
+    cout << mList << endl;*/
 }

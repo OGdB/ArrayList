@@ -29,6 +29,15 @@ protected:
 	}
 };
 
+TEST_F(OrderedSetFixture, ClearSet)
+{
+	EXPECT_EQ(mList.size(), 5);
+	mList.clear();
+	EXPECT_EQ(mList.size(), 0);
+	mList.clear(); // Attempt to clear an empty set
+	EXPECT_EQ(mList.size(), 0);
+}
+
 TEST_F(OrderedSetFixture, ContainsValue)
 {
 	EXPECT_EQ(mList.contains(3), true);
@@ -49,6 +58,10 @@ TEST_F(OrderedSetFixture, OS_Stream)
 	ss.str(string());
 	ss << mList;
 	EXPECT_EQ(ss.str(), "[0, 1, 2, 3, 4]");
+	ss.str(string());
+	mList.clear();
+	ss << mList;
+	EXPECT_EQ(ss.str(), "[]");
 }
 
 #endif

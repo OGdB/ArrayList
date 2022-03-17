@@ -84,6 +84,21 @@ namespace ssuds
 					mRight->print_recursive(returned_set);
 				// else, return node value
 			}
+			void clear_recursive()
+			{
+				// if there is an mLeft, check recursively if those have children (and delete those). Then delete mLeft.
+				if (mLeft != nullptr)
+				{
+					mLeft->clear_recursive(); // Clear all children of mLeft if any
+					delete mLeft;
+				}
+				// if there is an mRight, check recursively if those have children (and delete those). Then delete mRight.
+				if (mRight != nullptr)
+				{
+					mRight->clear_recursive(); // Clear all children of mRight if any
+					delete mRight;
+				}
+			}
 		};
 
 		Node* mRoot;
@@ -94,6 +109,7 @@ namespace ssuds
 
 		~OrderedSet()
 		{
+			clear();
 			// super-important!!
 		}
 
@@ -102,7 +118,7 @@ namespace ssuds
 		{
 			ArrayList<string> returned_set;
 
-			if (set.mRoot)
+			if (set.mRoot != nullptr)
 				set.mRoot->print_recursive(&returned_set);
 
 			os << returned_set;
@@ -113,7 +129,13 @@ namespace ssuds
 #pragma region TOP_LEVEL_FUNCTIONALITIES
 		void clear()
 		{
-
+			if (mRoot != nullptr)
+			{
+				mRoot->clear_recursive();
+				delete mRoot;
+				mRoot = nullptr;
+				mSize = 0;
+			}
 		}
 
 		/// @brief Look in the set for a value
