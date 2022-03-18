@@ -1,11 +1,19 @@
 #pragma once
 #include <string>
 #include <array_list.h>
+#include <array_list_utility.h>
+#include <ssuds.h>
 
 using namespace std;
 
 namespace ssuds
 {
+	enum order {
+		pre_order, // from all lefts to rights
+		post_order, // 'left to right'
+		in_order // a-b-c order
+	};
+
 	template <class T>
 	class OrderedSet
 	{
@@ -42,15 +50,15 @@ namespace ssuds
 				}
 				else if (val > mData)
 				{
-					if (mRight != nullptr)
-					{
-						return mRight->insert_recursive(val);
-					}
-					else
-					{
-						mRight = new Node(val);
-						return 1;
-					}
+				if (mRight != nullptr)
+				{
+					return mRight->insert_recursive(val);
+				}
+				else
+				{
+					mRight = new Node(val);
+					return 1;
+				}
 				}
 
 				// The value is equal to me -- duplicate!!
@@ -72,10 +80,10 @@ namespace ssuds
 
 				return false; // Else the value is not there.
 			}
-			void print_recursive(ArrayList<string>* returned_set)
+			void print_recursive(ArrayList<T>* returned_set)
 			{
 				// Add this value to returned set..
-				returned_set->append(to_string(mData));
+				returned_set->append(mData);
 
 				// if this node has mLeft/mRight, call recursively
 				if (mLeft != nullptr)
@@ -99,8 +107,61 @@ namespace ssuds
 					delete mRight;
 				}
 			}
+
+			/// @brief 
+			/// @param order 
+			/// @param list 
+			/// @return 
+			void return_in_order(order order, ArrayList<T>& list)
+			{
+				// append values to the arraylist according to the provided order
+				if (order == pre_order)
+				{
+					list.append(mData); // Add myself
+
+					if (mLeft != nullptr)
+						mLeft->return_in_order(order, list); // After (first) adding the most mLeft
+					if (mRight != nullptr)
+						mRight->return_in_order(order, list); // AND thereafter the mRight,
+				}
+				else if (order == post_order)
+				{
+					if (mLeft != nullptr)
+						mLeft->return_in_order(order, list); // After (first) adding the most mLeft
+					if (mRight != nullptr)
+						mRight->return_in_order(order, list); // AND thereafter the mRight,
+
+					list.append(mData); // Add myself
+				}
+				else if (order == in_order)
+				{
+					// If there is only an mLeft, first recursive, then append
+					if (mLeft != nullptr && mRight == nullptr)
+					{
+						mLeft->return_in_order(order, list);
+						list.append(mData);
+						return;
+					}
+					else if (mLeft == nullptr && mRight != nullptr)
+					{
+						list.append(mData);
+						mRight->return_in_order(order, list);
+						return;
+					}
+					else if (mLeft != nullptr && mRight != nullptr)
+					{
+						mLeft->return_in_order(order, list);
+						list.append(mData);
+						mRight->return_in_order(order, list);
+						return;
+					}
+
+					list.append(mData);
+				}
+			}
 		};
 
+		// SET ATTRIBUTES
 		Node* mRoot;
 		int mSize;
 
@@ -116,7 +177,7 @@ namespace ssuds
 #pragma region OPERATOR_OVERRIDES
 		friend ostream& operator<<(ostream& os, const OrderedSet<T>& set)
 		{
-			ArrayList<string> returned_set;
+			ArrayList<T> returned_set;
 
 			if (set.mRoot != nullptr)
 				set.mRoot->print_recursive(&returned_set);
@@ -176,6 +237,18 @@ namespace ssuds
 		int size() const
 		{
 			return mSize;
+		}
+
+		/// @brief Return the set in a specified order
+		/// @return the order
+		ArrayList<T> traversal(order order) 
+		{
+			ArrayList<T> list;
+
+			if (mRoot != nullptr)
+				mRoot->return_in_order(order, list);
+
+			return list;
 		}
 #pragma endregion
 	};

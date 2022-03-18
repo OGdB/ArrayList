@@ -17,8 +17,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\array_list.h" />
+    <ClInclude Include="..\..\include\array_list_utility.h" />
     <ClInclude Include="..\..\include\linked_list.h" />
     <ClInclude Include="..\..\include\ordered_set.h" />
+    <ClInclude Include="..\..\include\ssuds.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
