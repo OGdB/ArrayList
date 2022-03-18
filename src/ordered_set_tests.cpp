@@ -18,6 +18,7 @@ class OrderedSetFixture : public ::testing::Test
 protected:
 	OrderedSet<int> mList;
 	OrderedSet<int> mList2;
+	OrderedSet<string> mList3;
 
 	void SetUp() override
 	{
@@ -26,6 +27,16 @@ protected:
 		mList.insert(2);
 		mList.insert(3);
 		mList.insert(4);
+
+		mList3.insert("M");
+		mList3.insert("G");
+		mList3.insert("S");
+		mList3.insert("B");
+		mList3.insert("P");
+		mList3.insert("Q");
+		mList3.insert("A");
+		mList3.insert("D");
+		mList3.insert("C");
 	}
 };
 
@@ -48,6 +59,30 @@ TEST_F(OrderedSetFixture, SetSizes)
 {
 	EXPECT_EQ(mList.size(), 5);
 	EXPECT_EQ(mList2.size(), 0);
+}
+
+TEST_F(OrderedSetFixture, TraversalMethod)
+{
+	stringstream ss;
+	ss << mList3;
+	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
+	ss.str(string());
+
+	ArrayList<string> pre_order_list = mList3.traversal(pre_order);
+	ss << pre_order_list;
+	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
+	ss.str(string());
+
+	ArrayList<string> post_order_list = mList3.traversal(post_order);
+	ss << post_order_list;
+	EXPECT_EQ(ss.str(), "[A, C, D, B, G, Q, P, S, M]");
+	ss.str(string());
+
+	ArrayList<string> in_order_list = mList3.traversal(in_order);
+	ss << in_order_list;
+	EXPECT_EQ(ss.str(), "[A, B, C, D, G, M, P, Q, S]");
+	ss.str(string());
+
 }
 
 TEST_F(OrderedSetFixture, OS_Stream)
