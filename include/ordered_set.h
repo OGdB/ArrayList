@@ -188,7 +188,7 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONALITIES
-		/// @brief Clear the entire set
+		/// @brief Clear the entire set.
 		void clear()
 		{
 			if (mRoot != nullptr)
@@ -200,7 +200,7 @@ namespace ssuds
 			}
 		}
 
-		/// @brief Look in the set for a value
+		/// @brief Look in the set for a value.
 		/// @param val The value to look for
 		/// @return Whether the value is found in the set
 		bool contains(const T& val)
@@ -211,7 +211,7 @@ namespace ssuds
 			}
 			else
 			{
-				mRoot->contains_recursive(val);
+				return mRoot->contains_recursive(val);
 			}
 		}
 
@@ -219,7 +219,7 @@ namespace ssuds
 		/// @param val The value to add
 		void insert(const T& val)
 		{
-			if (mRoot)
+			if (mRoot != nullptr)
 			{
 				// We have elements already -- tell the root
 				// to handle it!
@@ -239,7 +239,7 @@ namespace ssuds
 			return mSize;
 		}
 
-		/// @brief Return the set in a specified order
+		/// @brief Return the set in a specified order.
 		/// @return the order
 		ArrayList<T> traversal(order order) 
 		{
@@ -250,6 +250,38 @@ namespace ssuds
 
 			return list;
 		}
+
+		/// @brief creates a new optimal root node and arrange children in an optimal manner.
+		/// @param sortedArray the sorted array to return the ordered set of
+		/// @param start the first integer of the sub-tree
+		/// @param end the last integer of the sub-tree
+		/// @return 
+		void rebalance()
+		{
+			ArrayList<T> sortedArray = traversal(order::in_order);
+			clear();
+			
+			int start = 0;
+			int end = sortedArray.size() - 1;
+
+			rebalance_recursive(sortedArray, start, end);
+		}
+
+		protected:
+			void rebalance_recursive(ArrayList<T>& sortedArray, int start, int end)
+			{
+				if (start > end)  // return if the array is not big enough
+					return;
+
+				int middle = (start + end) / 2;  // get middle integer
+
+				T& middleNode = sortedArray[middle];
+
+				insert(middleNode);
+
+				rebalance_recursive(sortedArray, start, middle - 1);
+				rebalance_recursive(sortedArray, middle + 1, end);
+			}
 #pragma endregion
 	};
 }
