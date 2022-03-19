@@ -48,4 +48,5 @@ int main(int argc, char**argv)
     cout << "\nRebalanced mList:\n";
     mList.rebalance();
     cout << mList << endl;
+    cout << "List height: " << mList.get_height() << endl;
 }

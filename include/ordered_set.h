@@ -215,6 +215,16 @@ namespace ssuds
 			}
 		}
 
+		/// @brief Calculate the height in amount of nodes.
+		/// @return The amount of nodes if counted from mRoot to the lowest node vertically.
+		int get_height()
+		{
+			if (mRoot == nullptr)
+				return 1;
+
+			return return_height_recursive(mRoot);
+		}
+
 		/// @brief Add value to the set.
 		/// @param val The value to add
 		void insert(const T& val)
@@ -230,6 +240,18 @@ namespace ssuds
 				mRoot = new Node(val);
 				mSize = 1;
 			}
+		}
+
+		/// @brief Balances the ordered set to the lowest possible height
+		void rebalance()
+		{
+			ArrayList<T> sortedArray = traversal(order::in_order);
+			clear();
+
+			int start = 0;
+			int end = sortedArray.size() - 1;
+
+			rebalance_recursive(sortedArray, start, end);
 		}
 
 		/// @brief Get the amount of elements in the set
@@ -251,22 +273,6 @@ namespace ssuds
 			return list;
 		}
 
-		/// @brief creates a new optimal root node and arrange children in an optimal manner.
-		/// @param sortedArray the sorted array to return the ordered set of
-		/// @param start the first integer of the sub-tree
-		/// @param end the last integer of the sub-tree
-		/// @return 
-		void rebalance()
-		{
-			ArrayList<T> sortedArray = traversal(order::in_order);
-			clear();
-			
-			int start = 0;
-			int end = sortedArray.size() - 1;
-
-			rebalance_recursive(sortedArray, start, end);
-		}
-
 		protected:
 			void rebalance_recursive(ArrayList<T>& sortedArray, int start, int end)
 			{
@@ -281,6 +287,22 @@ namespace ssuds
 
 				rebalance_recursive(sortedArray, start, middle - 1);
 				rebalance_recursive(sortedArray, middle + 1, end);
+			}
+
+			/// @brief Keep calling the method until there are either no more mLeft or mRight nodes. Return the heighest of the 2 values. Ultimately returns the heighest value (lowest node).
+			/// @param node The node to check for an mLeft/mRight.
+			/// @return The amount of vertical iterations.
+			int return_height_recursive(Node* node)
+			{
+				int left_branch_height = 0;
+				int right_branch_height = 0;
+
+				if (node->mLeft != nullptr)
+					left_branch_height = return_height_recursive(node->mLeft);
+				if (node->mRight != nullptr)
+					right_branch_height = return_height_recursive(node->mRight);
+
+				return max(left_branch_height, right_branch_height) + 1;  // Return the heighest value (mLeft/mRight's branch).
 			}
 #pragma endregion
 	};

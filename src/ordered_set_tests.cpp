@@ -16,87 +16,104 @@ using namespace ssuds;
 class OrderedSetFixture : public ::testing::Test
 {
 protected:
-	OrderedSet<int> mList;
+	OrderedSet<string> mList;
 	OrderedSet<int> mList2;
-	OrderedSet<string> mList3;
+	OrderedSet<int> mList3;
 
 	void SetUp() override
 	{
-		mList.insert(0);
-		mList.insert(1);
-		mList.insert(2);
-		mList.insert(3);
-		mList.insert(4);
+		mList.insert("M");
+		mList.insert("G");
+		mList.insert("S");
+		mList.insert("B");
+		mList.insert("P");
+		mList.insert("Q");
+		mList.insert("A");
+		mList.insert("D");
+		mList.insert("C");
+		/*
+				m
+			  /   \
+			 g	   s
+			/	  /
+		   b	 p
+		  / \     \
+		 a   d	   q
+			/
+		   c
+		*/
 
-		mList3.insert("M");
-		mList3.insert("G");
-		mList3.insert("S");
-		mList3.insert("B");
-		mList3.insert("P");
-		mList3.insert("Q");
-		mList3.insert("A");
-		mList3.insert("D");
-		mList3.insert("C");
+		mList2.insert(0);
+		mList2.insert(1);
+		mList2.insert(2);
+		mList2.insert(3);
+		mList2.insert(4);
 	}
 };
 
 TEST_F(OrderedSetFixture, ClearSet)
 {
-	EXPECT_EQ(mList.size(), 5);
-	mList.clear();
-	EXPECT_EQ(mList.size(), 0);
-	mList.clear(); // Attempt to clear an empty set
-	EXPECT_EQ(mList.size(), 0);
+	EXPECT_EQ(mList2.size(), 5);
+	mList2.clear();
+	EXPECT_EQ(mList2.size(), 0);
+	mList2.clear(); // Attempt to clear an empty set
+	EXPECT_EQ(mList2.size(), 0);
 }
 
 TEST_F(OrderedSetFixture, ContainsValue)
 {
-	EXPECT_EQ(mList.contains(3), true);
-	EXPECT_EQ(mList2.contains(6), false);
+	EXPECT_EQ(mList2.contains(3), true);
+	EXPECT_EQ(mList3.contains(6), false);
 }
 
-TEST_F(OrderedSetFixture, SetSizes)
+TEST_F(OrderedSetFixture, BinaryTreeHeight)
 {
-	EXPECT_EQ(mList.size(), 5);
-	EXPECT_EQ(mList2.size(), 0);
-}
-
-TEST_F(OrderedSetFixture, TraversalMethod)
-{
-	stringstream ss;
-	ss << mList3;
-	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
-	ss.str(string());
-
-	ArrayList<string> pre_order_list = mList3.traversal(pre_order);
-	ss << pre_order_list;
-	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
-	ss.str(string());
-
-	ArrayList<string> post_order_list = mList3.traversal(post_order);
-	ss << post_order_list;
-	EXPECT_EQ(ss.str(), "[A, C, D, B, G, Q, P, S, M]");
-	ss.str(string());
-
-	ArrayList<string> in_order_list = mList3.traversal(in_order);
-	ss << in_order_list;
-	EXPECT_EQ(ss.str(), "[A, B, C, D, G, M, P, Q, S]");
-	ss.str(string());
-
+	EXPECT_EQ(mList.get_height(), 5);
+	EXPECT_EQ(mList2.get_height(), 5);
 }
 
 TEST_F(OrderedSetFixture, OS_Stream)
 {
 	stringstream ss;
-	ss << mList2;
+	ss << mList3;
 	EXPECT_EQ(ss.str(), "[]");
 	ss.str(string());
-	ss << mList;
+	ss << mList2;
 	EXPECT_EQ(ss.str(), "[0, 1, 2, 3, 4]");
 	ss.str(string());
-	mList.clear();
-	ss << mList;
+	mList2.clear();
+	ss << mList2;
 	EXPECT_EQ(ss.str(), "[]");
+}
+
+TEST_F(OrderedSetFixture, SetSizes)
+{
+	EXPECT_EQ(mList2.size(), 5);
+	EXPECT_EQ(mList3.size(), 0);
+}
+
+TEST_F(OrderedSetFixture, TraversalMethod)
+{
+	stringstream ss;
+	ss << mList;
+	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
+	ss.str(string());
+
+	ArrayList<string> pre_order_list = mList.traversal(pre_order);
+	ss << pre_order_list;
+	EXPECT_EQ(ss.str(), "[M, G, B, A, D, C, S, P, Q]");
+	ss.str(string());
+
+	ArrayList<string> post_order_list = mList.traversal(post_order);
+	ss << post_order_list;
+	EXPECT_EQ(ss.str(), "[A, C, D, B, G, Q, P, S, M]");
+	ss.str(string());
+
+	ArrayList<string> in_order_list = mList.traversal(in_order);
+	ss << in_order_list;
+	EXPECT_EQ(ss.str(), "[A, B, C, D, G, M, P, Q, S]");
+	ss.str(string());
+
 }
 
 #endif
