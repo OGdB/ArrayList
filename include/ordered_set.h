@@ -8,7 +8,8 @@ using namespace std;
 
 namespace ssuds
 {
-	enum order {
+	enum order 
+	{
 		pre_order, // from all lefts to rights
 		post_order, // 'left to right'
 		in_order // a-b-c order
@@ -26,6 +27,53 @@ namespace ssuds
 			Node* mRight;
 
 			Node(const T& val) : mData(val), mLeft(nullptr), mRight(nullptr) {}
+
+			void clear_recursive()
+			{
+				// if there is an mLeft, check recursively if those have children (and delete those). Then delete mLeft.
+				if (mLeft != nullptr)
+				{
+					mLeft->clear_recursive(); // Clear all children of mLeft if any
+					delete mLeft;
+				}
+				// if there is an mRight, check recursively if those have children (and delete those). Then delete mRight.
+				if (mRight != nullptr)
+				{
+					mRight->clear_recursive(); // Clear all children of mRight if any
+					delete mRight;
+				}
+			}
+
+			bool contains_recursive(const T& val)
+			{
+				if (mData == val)
+					return true;
+				else
+				{
+					if (mLeft != nullptr && mData > val) // if this node's value is bigger than the node we look for, go left (to smaller value)
+						return mLeft->contains_recursive(val);
+					else if (mRight != nullptr && mData < val) // if bigger, go right.
+						return mRight->contains_recursive(val);
+				}
+
+				return false; // Else the value is not there.
+			}
+
+			bool erase_recursive(const T& val)
+			{
+				if (mData == val)
+				{
+					// Case 1: leaf node.
+					if (mLeft == nullptr && mRight == nullptr)
+					{
+
+					}
+				}
+
+				// Case 2: node with 1 child.
+
+				// Case 3: node with 2 children.
+			}
 
 			int insert_recursive(const T& val)
 			{
@@ -50,15 +98,15 @@ namespace ssuds
 				}
 				else if (val > mData)
 				{
-				if (mRight != nullptr)
-				{
-					return mRight->insert_recursive(val);
-				}
-				else
-				{
-					mRight = new Node(val);
-					return 1;
-				}
+					if (mRight != nullptr)
+					{
+						return mRight->insert_recursive(val);
+					}
+					else
+					{
+						mRight = new Node(val);
+						return 1;
+					}
 				}
 
 				// The value is equal to me -- duplicate!!
@@ -66,20 +114,6 @@ namespace ssuds
 				return 0;
 			}
 
-			bool contains_recursive(const T& val)
-			{
-				if (mData == val)
-					return true;
-				else
-				{
-					if (mLeft != nullptr && mData > val) // if this node's value is bigger than the node we look for, go left (to smaller value)
-						return mLeft->contains_recursive(val);
-					else if (mRight != nullptr && mData < val) // if bigger, go right.
-						return mRight->contains_recursive(val);
-				}
-
-				return false; // Else the value is not there.
-			}
 			void print_recursive(ArrayList<T>* returned_set)
 			{
 				// Add this value to returned set..
@@ -92,20 +126,21 @@ namespace ssuds
 					mRight->print_recursive(returned_set);
 				// else, return node value
 			}
-			void clear_recursive()
+
+			/// @brief Keep calling the method until there are either no more mLeft or mRight nodes. Return the heighest of the 2 values. Ultimately returns the heighest value (lowest node).
+			/// @param node The node to check for an mLeft/mRight.
+			/// @return The amount of vertical iterations.
+			int return_height_recursive()
 			{
-				// if there is an mLeft, check recursively if those have children (and delete those). Then delete mLeft.
+				int left_branch_height = 0;
+				int right_branch_height = 0;
+
 				if (mLeft != nullptr)
-				{
-					mLeft->clear_recursive(); // Clear all children of mLeft if any
-					delete mLeft;
-				}
-				// if there is an mRight, check recursively if those have children (and delete those). Then delete mRight.
+					left_branch_height = mLeft->return_height_recursive();
 				if (mRight != nullptr)
-				{
-					mRight->clear_recursive(); // Clear all children of mRight if any
-					delete mRight;
-				}
+					right_branch_height = mRight->return_height_recursive();
+
+				return max(left_branch_height, right_branch_height) + 1;  // Return the heighest value (mLeft/mRight's branch).
 			}
 
 			/// @brief 
@@ -215,6 +250,17 @@ namespace ssuds
 			}
 		}
 
+		/// @brief Remove a value from set.
+		/// @param val The value to remove.
+		/// @return true if it was removed, false if it wasn't there.
+		bool erase(const T& val)
+		{
+			if (mRoot == nullptr)
+				return false;
+
+			mRoot->erase_recursive();
+		}
+
 		/// @brief Calculate the height in amount of nodes.
 		/// @return The amount of nodes if counted from mRoot to the lowest node vertically.
 		int get_height()
@@ -222,7 +268,7 @@ namespace ssuds
 			if (mRoot == nullptr)
 				return 1;
 
-			return return_height_recursive(mRoot);
+			return mRoot->return_height_recursive();
 		}
 
 		/// @brief Add value to the set.
@@ -287,22 +333,6 @@ namespace ssuds
 
 				rebalance_recursive(sortedArray, start, middle - 1);
 				rebalance_recursive(sortedArray, middle + 1, end);
-			}
-
-			/// @brief Keep calling the method until there are either no more mLeft or mRight nodes. Return the heighest of the 2 values. Ultimately returns the heighest value (lowest node).
-			/// @param node The node to check for an mLeft/mRight.
-			/// @return The amount of vertical iterations.
-			int return_height_recursive(Node* node)
-			{
-				int left_branch_height = 0;
-				int right_branch_height = 0;
-
-				if (node->mLeft != nullptr)
-					left_branch_height = return_height_recursive(node->mLeft);
-				if (node->mRight != nullptr)
-					right_branch_height = return_height_recursive(node->mRight);
-
-				return max(left_branch_height, right_branch_height) + 1;  // Return the heighest value (mLeft/mRight's branch).
 			}
 #pragma endregion
 	};
