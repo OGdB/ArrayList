@@ -75,19 +75,19 @@ TEST_F(OrderedSetFixture, BinaryTreeHeight)
 
 TEST_F(OrderedSetFixture, EraseValue)
 {
-	// Leaf node (without children)
-	mList.erase("C");
-	EXPECT_EQ(mList.contains("C"), false);
-	mList2.erase(4);
-	EXPECT_EQ(mList2.contains(4), false);
-	mList.insert("C)");
-	mList2.insert(4);
+	// Leaf without children.
+	mList.erase("A");
+	EXPECT_EQ(mList.contains("A"), false);
 
 	// Node with 1 child.
-	mList.erase("D");
-	EXPECT_EQ(mList.contains("D"), false);
-	mList2.erase(3);
-	EXPECT_EQ(mList2.contains(3), false);
+	mList.erase("B");
+	EXPECT_EQ(mList.contains("B"), false);
+
+	// Node with 2 children.
+	mList.erase("M");
+	EXPECT_EQ(mList.contains("M"), false);
+
+	EXPECT_EQ(mList.erase("O"), false);
 }
 
 TEST_F(OrderedSetFixture, OS_Stream)

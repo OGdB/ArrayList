@@ -95,11 +95,19 @@ namespace ssuds
 							}
 						}
 
+						// Case 3 - node with 2 children: pick successor to replace node (left-most descendent of right child)
+						if (mLeft->mLeft != nullptr && mLeft->mRight != nullptr)
+						{
+							// copy the value of the successor to this node.
+							T& successor_val = mLeft->mRight->mLeft->mData; 
+							mLeft->mData = successor_val;
 
-						// Case 3 - node with 2 children: 
+							// delete duplicate value recursively (but not the node we just copied to).
+							return mLeft->mRight->erase_recursive(successor_val);
+						}
 					}
 
-					mLeft->erase_recursive(val);
+					return mLeft->erase_recursive(val);
 				}
 
 				if (mRight != nullptr)
@@ -133,9 +141,18 @@ namespace ssuds
 							}
 						}
 						// Case 3 - node with 2 children: 
+						if (mRight->mLeft != nullptr && mRight->mRight != nullptr)
+						{
+							// copy the value of the successor to this node.
+							T& successor_val = mRight->mRight->mLeft->mData;
+							mRight->mData = successor_val;
+
+							// delete duplicate value recursively (but not the node we just copied to).
+							return mRight->mRight->erase_recursive(successor_val);
+						}
 					}
 
-					mRight->erase_recursive(val);
+					return mRight->erase_recursive(val);
 				}
 			}
 
@@ -321,6 +338,15 @@ namespace ssuds
 		{
 			if (mRoot == nullptr)
 				return false;
+
+			if (mRoot->mData == val) // if the mRoot is the deleted value.
+			{
+				T& successor_val = mRoot->mRight->mLeft->mData;
+				mRoot->mData = successor_val;
+
+				// delete duplicate value recursively (but not the node we just copied to).
+				return mRoot->mRight->erase_recursive(successor_val);
+			}
 
 			return mRoot->erase_recursive(val);
 		}
