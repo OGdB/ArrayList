@@ -257,28 +257,15 @@ namespace ssuds
 				}
 				else if (order == in_order)
 				{
-					// If there is only an mLeft, first recursive, then append
-					if (mLeft != nullptr && mRight == nullptr)
-					{
+					// Loop through mLeft and append values before appending this value (if there is one).
+					if (mLeft != nullptr)
 						mLeft->return_in_order(order, list);
-						list.append(mData);
-						return;
-					}
-					else if (mLeft == nullptr && mRight != nullptr)
-					{
-						list.append(mData);
-						mRight->return_in_order(order, list);
-						return;
-					}
-					else if (mLeft != nullptr && mRight != nullptr)
-					{
-						mLeft->return_in_order(order, list);
-						list.append(mData);
-						mRight->return_in_order(order, list);
-						return;
-					}
 
 					list.append(mData);
+
+					// Append mRight's value after.
+					if (mRight != nullptr)
+						mRight->return_in_order(order, list);
 				}
 			}
 		};
