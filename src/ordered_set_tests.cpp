@@ -32,15 +32,15 @@ protected:
 		mList.insert("D");
 		mList.insert("C");
 		/*
-				m
+				M 
 			  /   \
-			 g	   s
+			 G	   S
 			/	  /
-		   b	 p
+		   B	 P
 		  / \     \
-		 a   d	   q
+		 A   D	   Q
 			/
-		   c
+		   C
 		*/
 
 		mList2.insert(0);
@@ -63,6 +63,7 @@ TEST_F(OrderedSetFixture, ClearSet)
 TEST_F(OrderedSetFixture, ContainsValue)
 {
 	EXPECT_EQ(mList2.contains(3), true);
+	EXPECT_EQ(mList.contains("Z"), false);
 	EXPECT_EQ(mList3.contains(6), false);
 }
 
@@ -70,6 +71,23 @@ TEST_F(OrderedSetFixture, BinaryTreeHeight)
 {
 	EXPECT_EQ(mList.get_height(), 5);
 	EXPECT_EQ(mList2.get_height(), 5);
+}
+
+TEST_F(OrderedSetFixture, EraseValue)
+{
+	// Leaf node (without children)
+	mList.erase("C");
+	EXPECT_EQ(mList.contains("C"), false);
+	mList2.erase(4);
+	EXPECT_EQ(mList2.contains(4), false);
+	mList.insert("C)");
+	mList2.insert(4);
+
+	// Node with 1 child.
+	mList.erase("D");
+	EXPECT_EQ(mList.contains("D"), false);
+	mList2.erase(3);
+	EXPECT_EQ(mList2.contains(3), false);
 }
 
 TEST_F(OrderedSetFixture, OS_Stream)

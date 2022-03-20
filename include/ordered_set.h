@@ -61,18 +61,82 @@ namespace ssuds
 
 			bool erase_recursive(const T& val)
 			{
-				if (mData == val)
-				{
-					// Case 1: leaf node.
-					if (mLeft == nullptr && mRight == nullptr)
-					{
+				if (mLeft == nullptr && mRight == nullptr)
+					return false;
 
+				if (mLeft != nullptr)
+				{
+					if (mLeft->mData == val) // mLeft is the data we want to erase.
+					{
+						// Case 1 - leaf node: node has no children.
+						if (mLeft->mLeft == nullptr && mLeft->mRight == nullptr)
+						{
+							delete mLeft;
+							mLeft = nullptr;
+							return true;
+						}
+
+						// Case 2 - node with 1 child: move child node up to take node's place.
+						if ((mLeft->mLeft != nullptr && mLeft->mRight == nullptr) || (mLeft->mLeft == nullptr && mLeft->mRight != nullptr)) // mLeft has 1 child
+						{
+							if (mLeft->mLeft != nullptr) // if mLeft has a left child
+							{
+								Node* grand_child = mLeft->mLeft;
+								delete mLeft;
+								mLeft = grand_child;
+								return true;
+							}
+							else // if mLeft has a right child
+							{
+								Node* grand_child = mLeft->mRight;
+								delete mLeft;
+								mLeft = grand_child;
+								return true;
+							}
+						}
+
+
+						// Case 3 - node with 2 children: 
 					}
+
+					mLeft->erase_recursive(val);
 				}
 
-				// Case 2: node with 1 child.
+				if (mRight != nullptr)
+				{
+					if (mRight->mData == val) // mRight is the data we want to erase.
+					{
+						// Case 1 - leaf node: node has no children.
+						if (mRight->mLeft == nullptr && mRight->mRight == nullptr)
+						{
+							delete mRight;
+							mRight = nullptr;
+							return true;
+						}
 
-				// Case 3: node with 2 children.
+						// Case 2 - node with 1 child: move child node up to take node's place.
+						if ((mRight->mLeft != nullptr && mRight->mRight == nullptr) || (mRight->mLeft == nullptr && mRight->mRight != nullptr)) // mRight has 1 child
+						{
+							if (mRight->mLeft != nullptr) // if mLeft has a left child
+							{
+								Node* grand_child = mRight->mLeft;
+								delete mRight;
+								mRight = grand_child;
+								return true;
+							}
+							else // if mLeft has a right child
+							{
+								Node* grand_child = mRight->mRight;
+								delete mRight;
+								mRight = grand_child;
+								return true;
+							}
+						}
+						// Case 3 - node with 2 children: 
+					}
+
+					mRight->erase_recursive(val);
+				}
 			}
 
 			int insert_recursive(const T& val)
@@ -258,7 +322,7 @@ namespace ssuds
 			if (mRoot == nullptr)
 				return false;
 
-			mRoot->erase_recursive();
+			return mRoot->erase_recursive(val);
 		}
 
 		/// @brief Calculate the height in amount of nodes.
