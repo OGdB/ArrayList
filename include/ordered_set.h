@@ -59,6 +59,9 @@ namespace ssuds
 				return false; // Else the value is not there.
 			}
 
+			/// @brief Looks at its children if any to see if their value matches the searched. Appropiately handles erasion if node with value has children.
+			/// @param val The value to look for in the set.
+			/// @return Whether the value was succesfully erased.
 			bool erase_recursive(const T& val)
 			{
 				if (mLeft == nullptr && mRight == nullptr)
@@ -156,6 +159,9 @@ namespace ssuds
 				}
 			}
 
+			/// @brief Recursively looks for the right spot in the set to insert the value.
+			/// @param val The value to insert.
+			/// @return 
 			int insert_recursive(const T& val)
 			{
 				if (val < mData)
@@ -424,6 +430,27 @@ namespace ssuds
 				rebalance_recursive(sortedArray, start, middle - 1);
 				rebalance_recursive(sortedArray, middle + 1, end);
 			}
+
+			public:
+				class OrderedSetIterator
+				{
+				protected:
+					OrderedSet& set;
+					Node current;
+
+					OrderedSetIterator(const OrderedSet& set) : set(set) {}
+
+					bool operator==(const OrderedSet& other) const
+					{
+						return &set == &other.set;
+					}
+
+					bool operator!=(const OrderedSet& other) const
+					{
+						return !(*this == other);
+					}
+				};
+				
 #pragma endregion
 	};
 }

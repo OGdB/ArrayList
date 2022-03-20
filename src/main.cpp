@@ -12,15 +12,4 @@ int main(int argc, char**argv)
 {
     testing::InitGoogleTest(&argc, argv);
     RUN_ALL_TESTS();
-
-    //OrderedSet<string> mList;
-    //mList.insert("M");
-    //mList.insert("G");
-    //mList.insert("S");
-    //mList.insert("B");
-    //mList.insert("P");
-    //mList.insert("Q");
-    //mList.insert("A");
-    //mList.insert("D");
-    //mList.insert("C");
 }
