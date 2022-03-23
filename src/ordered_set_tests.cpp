@@ -145,6 +145,14 @@ TEST_F(OrderedSetFixture, MoveConstructor)
 	EXPECT_EQ(test_list.contains(4.2f), true);
 }
 
+TEST_F(OrderedSetFixture, Rebalance)
+{
+	EXPECT_EQ(mList.get_height(), 5);
+	mList.rebalance();
+	EXPECT_EQ(mList.get_height(), 4);
+}
+
+
 TEST_F(OrderedSetFixture, OS_Stream)
 {
 	stringstream ss;

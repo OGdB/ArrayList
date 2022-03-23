@@ -292,7 +292,7 @@ namespace ssuds
 		/// Move-constructor: "steals" the data (shallow copy) from a soon-to-be-destroyed other ArrayList
 		OrderedSet(const OrderedSet&& other)
 		{
-			cout << "I LIKE TO MOVE IT- MOVE IT!\n\n";
+			// cout << "I LIKE TO MOVE IT- MOVE IT!\n\n";
 
 			ArrayList<T> other_order = other.traversal(pre_order);
 
