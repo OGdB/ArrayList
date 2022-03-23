@@ -31,6 +31,7 @@ protected:
 		mList.insert("A");
 		mList.insert("D");
 		mList.insert("C");
+
 		/*
 				M 
 			  /   \
@@ -90,6 +91,39 @@ TEST_F(OrderedSetFixture, EraseValue)
 	EXPECT_EQ(mList.erase("O"), false);
 }
 
+TEST_F(OrderedSetFixture, Iterator)
+{/*
+				M 
+			  /   \
+			 G	   S
+			/	  /
+		   B	 P
+		  / \     \
+		 A   D	   Q
+			/
+		   C
+		*/
+	OrderedSet<string>::OrderedSetIterator it = mList.begin();
+	EXPECT_EQ(*it, "A");
+	it++;
+	EXPECT_EQ(*it, "B");
+	it++;
+	EXPECT_EQ(*it, "C");
+	it++;
+	EXPECT_EQ(*it, "D");
+	it++;
+	EXPECT_EQ(*it, "G");
+	it++;
+	EXPECT_EQ(*it, "M");
+	it++;
+	EXPECT_EQ(*it, "P");
+	it++;
+	EXPECT_EQ(*it, "Q");
+	it++;
+	EXPECT_EQ(*it, "S");
+}
+
+
 TEST_F(OrderedSetFixture, OS_Stream)
 {
 	stringstream ss;
@@ -131,7 +165,6 @@ TEST_F(OrderedSetFixture, TraversalMethod)
 	ss << in_order_list;
 	EXPECT_EQ(ss.str(), "[A, B, C, D, G, M, P, Q, S]");
 	ss.str(string());
-
 }
 
 #endif

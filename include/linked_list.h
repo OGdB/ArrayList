@@ -77,6 +77,7 @@ namespace ssuds
 				else
 					current = current->mPrev;
 			}
+
 			void operator--()
 			{
 				if (!reverse)

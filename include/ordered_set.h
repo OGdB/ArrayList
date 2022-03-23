@@ -3,6 +3,7 @@
 #include <array_list.h>
 #include <array_list_utility.h>
 #include <ssuds.h>
+#include <stack>
 
 using namespace std;
 
@@ -234,7 +235,7 @@ namespace ssuds
 			/// @param order 
 			/// @param list 
 			/// @return 
-			void return_in_order(order order, ArrayList<T>& list)
+			void return_in_order(const order order, ArrayList<T>& list)
 			{
 				// append values to the arraylist according to the provided order
 				if (order == pre_order)
@@ -270,20 +271,85 @@ namespace ssuds
 			}
 		};
 
-		// SET ATTRIBUTES
+		// SET'S ATTRIBUTES
 		Node* mRoot;
 		int mSize;
 
 	public:
+		/// Default-constructor
 		OrderedSet() : mRoot(nullptr), mSize(0) {}
 
+		/// Copy-constructor
+		/// Get the order of insertion as an arraylist by traversing through the other arraylist and insert in order.
+		OrderedSet(const OrderedSet& other)
+		{
+			ArrayList<T> other_order = other.traversal(order::pre_order);
+			
+			for (T val : other_order)
+				insert(val);
+		}
+
+		/// Move-constructor: "steals" the data (shallow copy) from a soon-to-be-destroyed other ArrayList
+		OrderedSet(const OrderedSet&& other)
+		{
+			ArrayList<T> other_order = other.traversal(order::pre_order);
+
+			for (T val : other_order)
+				insert(val);
+
+			other.mRoot = nullptr;
+			other.mSize = 0;
+		}
+
+		/// Initializer-list constructor
+		OrderedSet(initializer_list<T> ilist) : mSize(ilist.size())
+		{
+			for (T val : ilist)
+				insert(val);
+		}
+
+		// Destructor
 		~OrderedSet()
 		{
 			clear();
 			// super-important!!
 		}
+		
 
 #pragma region OPERATOR_OVERRIDES
+		bool operator==(const OrderedSet& other) const
+		{
+			// If the mRoot->mData and all mLefts->mData and mRights->mData of this ordered set are the same as other's.
+			if (mSize != other.mSize || mRoot->mData != other.mRoot->mData) // If sets are different sizes or different mRoots, definitely different.
+				return false;
+			else // Else, compare each value in both sets
+			{
+				ArrayList<T> this_set = traversal(order::post_order);
+				ArrayList<T> other_set = other.traversal(order::post_order);
+
+				if (this_set == other_set)
+					return true;
+				else
+					return false;
+			}
+		}
+		bool operator!=(const OrderedSet& other) const
+		{
+			// If the mRoot->mData and all mLefts->mData and mRights->mData of this ordered set are the same as other's.
+			if (mSize != other.mSize || mRoot->mData != other.mRoot->mData) // If sets are different sizes or different mRoots, definitely different.
+				return true;
+			else // Else, compare each value in both sets
+			{
+				ArrayList<T> this_set = traversal(order::post_order);
+				ArrayList<T> other_set = other.traversal(order::post_order);
+
+				if (this_set == other_set)
+					return false;
+				else
+					return true;
+			}
+		}
+
 		friend ostream& operator<<(ostream& os, const OrderedSet<T>& set)
 		{
 			ArrayList<T> returned_set;
@@ -417,27 +483,113 @@ namespace ssuds
 				rebalance_recursive(sortedArray, start, middle - 1);
 				rebalance_recursive(sortedArray, middle + 1, end);
 			}
+#pragma endregion
 
 			public:
 				class OrderedSetIterator
 				{
 				protected:
-					OrderedSet& set;
-					Node current;
+					Node* mCurrent;
+					stack<Node*> nodeStack;
 
-					OrderedSetIterator(const OrderedSet& set) : set(set) {}
+				public:
+					// Should start at the far left mCurrent
+					OrderedSetIterator(Node* mRoot) : mCurrent(mRoot) 
+					{
+						// Loop through the array
+						while (mCurrent->mLeft != nullptr)
+						{
+							nodeStack.push(mCurrent); // Save previous node
+
+							mCurrent = mCurrent->mLeft;
+						}
+					}
+					// Should return the end
+					OrderedSetIterator(Node* mRoot, bool atEnd) : mCurrent(mRoot)
+					{
+						// Loop through the array
+						if (atEnd) 
+						{
+							while (mCurrent->mRight != nullptr)
+							{
+								mCurrent = mCurrent->mRight;
+							}
+						}
+						else
+						{
+							while (mCurrent->mLeft != nullptr)
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+					}
+
+					void operator++()
+					{
+						// If there is an mRight go to that value, else go to the previous in the stack.
+						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
+						if (mCurrent->mRight != nullptr)
+						{
+							mCurrent = mCurrent->mRight;
+							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+						else if (nodeStack.size() > 0)
+						{
+							mCurrent = nodeStack.top(); // Go to the previous value.
+							nodeStack.pop();
+						}
+					}
+					void operator++(int dummy)
+					{
+						// If there is an mRight go to that value, else go to the previous in the stack.
+						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
+						if (mCurrent->mRight != nullptr)
+						{
+							mCurrent = mCurrent->mRight;
+							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+						else if (nodeStack.size() > 0)
+						{
+							mCurrent = nodeStack.top(); // Go to the previous value.
+							nodeStack.pop();
+						}
+					}
+
+					T& operator*()
+					{
+						return mCurrent->mData;
+					}
 
 					bool operator==(const OrderedSet& other) const
 					{
-						return &set == &other.set;
+						return this == other;
 					}
 
 					bool operator!=(const OrderedSet& other) const
 					{
-						return !(*this == other);
+						return !(this == other);
 					}
 				};
-				
-#pragma endregion
+
+				OrderedSetIterator begin()
+				{
+					return OrderedSetIterator(mRoot);
+				}
+				OrderedSetIterator end()
+				{
+					return OrderedSetIterator(mRoot, true);
+				}
 	};
 }
