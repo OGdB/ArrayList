@@ -280,10 +280,10 @@ namespace ssuds
 		OrderedSet() : mRoot(nullptr), mSize(0) {}
 
 		/// Copy-constructor
-		/// Get the order of insertion as an arraylist by traversing through the other arraylist and insert in order.
-		OrderedSet(const OrderedSet& other)
+		OrderedSet(const OrderedSet<T>& other)
 		{
-			ArrayList<T> other_order = other.traversal(order::pre_order);
+			//cout << "Constructor called\n";
+			ArrayList<T> other_order = other.traversal(pre_order);
 			
 			for (T val : other_order)
 				insert(val);
@@ -292,13 +292,12 @@ namespace ssuds
 		/// Move-constructor: "steals" the data (shallow copy) from a soon-to-be-destroyed other ArrayList
 		OrderedSet(const OrderedSet&& other)
 		{
-			ArrayList<T> other_order = other.traversal(order::pre_order);
+			cout << "I LIKE TO MOVE IT- MOVE IT!\n\n";
+
+			ArrayList<T> other_order = other.traversal(pre_order);
 
 			for (T val : other_order)
 				insert(val);
-
-			other.mRoot = nullptr;
-			other.mSize = 0;
 		}
 
 		/// Initializer-list constructor
@@ -312,7 +311,6 @@ namespace ssuds
 		~OrderedSet()
 		{
 			clear();
-			// super-important!!
 		}
 		
 
@@ -458,7 +456,7 @@ namespace ssuds
 
 		/// @brief Return the set in a specified order.
 		/// @return the order
-		ArrayList<T> traversal(order order) 
+		ArrayList<T> traversal(order order) const
 		{
 			ArrayList<T> list;
 

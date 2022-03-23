@@ -74,6 +74,14 @@ TEST_F(OrderedSetFixture, BinaryTreeHeight)
 	EXPECT_EQ(mList2.get_height(), 5);
 }
 
+TEST_F(OrderedSetFixture, CopyConstructor)
+{
+	OrderedSet<string> mList_copy(mList);
+	EXPECT_EQ(mList.size(), mList_copy.size());
+	EXPECT_EQ(mList.get_height(), mList_copy.get_height());
+	
+}
+
 TEST_F(OrderedSetFixture, EraseValue)
 {
 	// Leaf without children.
@@ -91,18 +99,16 @@ TEST_F(OrderedSetFixture, EraseValue)
 	EXPECT_EQ(mList.erase("O"), false);
 }
 
+TEST_F(OrderedSetFixture, InitializerList)
+{
+	OrderedSet<string> tList{ "M", "G", "S", "B", "P", "Q", "A", "D", "C" };
+
+	EXPECT_EQ(mList.size(), tList.size());
+	EXPECT_EQ(mList.get_height(), tList.get_height());
+}
+
 TEST_F(OrderedSetFixture, Iterator)
-{/*
-				M 
-			  /   \
-			 G	   S
-			/	  /
-		   B	 P
-		  / \     \
-		 A   D	   Q
-			/
-		   C
-		*/
+{
 	OrderedSet<string>::OrderedSetIterator it = mList.begin();
 	EXPECT_EQ(*it, "A");
 	it++;
@@ -121,8 +127,23 @@ TEST_F(OrderedSetFixture, Iterator)
 	EXPECT_EQ(*it, "Q");
 	it++;
 	EXPECT_EQ(*it, "S");
+	it++;
 }
 
+OrderedSet<float> move_func()
+{
+	OrderedSet<float> result;
+	result.insert(3.1f);
+	result.insert(4.2f);
+	return result;
+}
+TEST_F(OrderedSetFixture, MoveConstructor)
+{
+	OrderedSet<float> test_list = move_func();
+	ASSERT_EQ(test_list.size(), 2);
+	EXPECT_EQ(test_list.contains(3.1f), true);
+	EXPECT_EQ(test_list.contains(4.2f), true);
+}
 
 TEST_F(OrderedSetFixture, OS_Stream)
 {

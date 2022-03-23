@@ -157,6 +157,7 @@ namespace ssuds
 		LinkedList() : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
 		}
+
 		// Copy-Constructor
 		LinkedList(const LinkedList& other) : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
@@ -168,6 +169,7 @@ namespace ssuds
 				cur_node = cur_node->mNext;
 			}
 		}
+
 		// Move-Constructor
 		LinkedList(LinkedList&& other) : mStart(other.mStart), mEnd(other.mEnd), mSize(other.mSize)
 		{
@@ -175,9 +177,11 @@ namespace ssuds
 			other.mStart = nullptr;
 			other.mEnd = nullptr;
 		};
+
 		// Initializer-List-Constructor
 		LinkedList(const initializer_list<T>& ilist) : mStart(nullptr), mEnd(nullptr), mSize(0)
 		{
+			// cout << "Initializer-Constructor called!\n\n";
 			for (T val : ilist)
 			{
 				append(val);
