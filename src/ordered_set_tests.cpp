@@ -79,7 +79,15 @@ TEST_F(OrderedSetFixture, CopyConstructor)
 	OrderedSet<string> mList_copy(mList);
 	EXPECT_EQ(mList.size(), mList_copy.size());
 	EXPECT_EQ(mList.get_height(), mList_copy.get_height());
-	
+}
+
+TEST_F(OrderedSetFixture, EqualOperator)
+{
+	OrderedSet<string> mList_copy;
+	mList_copy = mList;
+
+	EXPECT_EQ(mList_copy.size(), mList.size());
+	EXPECT_EQ(mList_copy.get_height(), mList.get_height());
 }
 
 TEST_F(OrderedSetFixture, EraseValue)
@@ -151,7 +159,6 @@ TEST_F(OrderedSetFixture, Rebalance)
 	mList.rebalance();
 	EXPECT_EQ(mList.get_height(), 4);
 }
-
 
 TEST_F(OrderedSetFixture, OS_Stream)
 {

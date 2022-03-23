@@ -103,7 +103,7 @@ namespace ssuds
 						if (mLeft->mLeft != nullptr && mLeft->mRight != nullptr)
 						{
 							// copy the value of the successor to this node.
-							T& successor_val = mLeft->mRight->mLeft->mData; 
+							T& successor_val = mLeft->mRight->mLeft->mData;
 							mLeft->mData = successor_val;
 
 							// delete duplicate value recursively (but not the node we just copied to).
@@ -271,10 +271,120 @@ namespace ssuds
 			}
 		};
 
+#pragma region ITERATOR
+			public:
+				class OrderedSetIterator
+				{
+				protected:
+					Node* mCurrent;
+					stack<Node*> nodeStack;
+
+				public:
+					// Should start at the far left mCurrent
+					OrderedSetIterator(Node* mRoot) : mCurrent(mRoot)
+					{
+						// Loop through the array
+						while (mCurrent->mLeft != nullptr)
+						{
+							nodeStack.push(mCurrent); // Save previous node
+
+							mCurrent = mCurrent->mLeft;
+						}
+					}
+					// Should return the end
+					OrderedSetIterator(Node* mRoot, bool atEnd) : mCurrent(mRoot)
+					{
+						// Loop through the array
+						if (atEnd)
+						{
+							while (mCurrent->mRight != nullptr)
+							{
+								mCurrent = mCurrent->mRight;
+							}
+						}
+						else
+						{
+							while (mCurrent->mLeft != nullptr)
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+					}
+
+					void operator++()
+					{
+						// If there is an mRight go to that value, else go to the previous in the stack.
+						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
+						if (mCurrent->mRight != nullptr)
+						{
+							mCurrent = mCurrent->mRight;
+							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+						else if (nodeStack.size() > 0)
+						{
+							mCurrent = nodeStack.top(); // Go to the previous value.
+							nodeStack.pop();
+						}
+					}
+					void operator++(int dummy)
+					{
+						// If there is an mRight go to that value, else go to the previous in the stack.
+						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
+						if (mCurrent->mRight != nullptr)
+						{
+							mCurrent = mCurrent->mRight;
+							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
+							{
+								nodeStack.push(mCurrent); // Save previous node
+
+								mCurrent = mCurrent->mLeft;
+							}
+						}
+						else if (nodeStack.size() > 0)
+						{
+							mCurrent = nodeStack.top(); // Go to the previous value.
+							nodeStack.pop();
+						}
+					}
+
+					T& operator*()
+					{
+						return mCurrent->mData;
+					}
+
+					bool operator==(const OrderedSet& other) const
+					{
+						return this == other;
+					}
+
+					bool operator!=(const OrderedSet& other) const
+					{
+						return !(this == other);
+					}
+				};
+
+				OrderedSetIterator begin() const
+				{
+					return OrderedSetIterator(mRoot);
+				}
+				OrderedSetIterator end() const
+				{
+					return OrderedSetIterator(mRoot, true);
+				}
+#pragma endregion
+
 		// SET'S ATTRIBUTES
 		Node* mRoot;
 		int mSize;
 
+#pragma region CONSTRUCTORS
 	public:
 		/// Default-constructor
 		OrderedSet() : mRoot(nullptr), mSize(0) {}
@@ -301,7 +411,7 @@ namespace ssuds
 		}
 
 		/// Initializer-list constructor
-		OrderedSet(initializer_list<T> ilist) : mSize(ilist.size())
+		OrderedSet(initializer_list<T> ilist)
 		{
 			for (T val : ilist)
 				insert(val);
@@ -312,9 +422,26 @@ namespace ssuds
 		{
 			clear();
 		}
-		
+#pragma endregion
 
 #pragma region OPERATOR_OVERRIDES
+		OrderedSet& operator=(const OrderedSet& other)
+		{
+			if (&other != this)
+			{
+				clear();
+
+				ArrayList<T> to_array = other.traversal(pre_order);
+				
+				for (T val : to_array)
+					insert(val);
+				
+			}
+
+			// Return a reference to ourself
+			return *this;
+		}
+
 		bool operator==(const OrderedSet& other) const
 		{
 			// If the mRoot->mData and all mLefts->mData and mRights->mData of this ordered set are the same as other's.
@@ -483,111 +610,5 @@ namespace ssuds
 			}
 #pragma endregion
 
-			public:
-				class OrderedSetIterator
-				{
-				protected:
-					Node* mCurrent;
-					stack<Node*> nodeStack;
-
-				public:
-					// Should start at the far left mCurrent
-					OrderedSetIterator(Node* mRoot) : mCurrent(mRoot) 
-					{
-						// Loop through the array
-						while (mCurrent->mLeft != nullptr)
-						{
-							nodeStack.push(mCurrent); // Save previous node
-
-							mCurrent = mCurrent->mLeft;
-						}
-					}
-					// Should return the end
-					OrderedSetIterator(Node* mRoot, bool atEnd) : mCurrent(mRoot)
-					{
-						// Loop through the array
-						if (atEnd) 
-						{
-							while (mCurrent->mRight != nullptr)
-							{
-								mCurrent = mCurrent->mRight;
-							}
-						}
-						else
-						{
-							while (mCurrent->mLeft != nullptr)
-							{
-								nodeStack.push(mCurrent); // Save previous node
-
-								mCurrent = mCurrent->mLeft;
-							}
-						}
-					}
-
-					void operator++()
-					{
-						// If there is an mRight go to that value, else go to the previous in the stack.
-						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
-						if (mCurrent->mRight != nullptr)
-						{
-							mCurrent = mCurrent->mRight;
-							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
-							{
-								nodeStack.push(mCurrent); // Save previous node
-
-								mCurrent = mCurrent->mLeft;
-							}
-						}
-						else if (nodeStack.size() > 0)
-						{
-							mCurrent = nodeStack.top(); // Go to the previous value.
-							nodeStack.pop();
-						}
-					}
-					void operator++(int dummy)
-					{
-						// If there is an mRight go to that value, else go to the previous in the stack.
-						// Does not need to check for mLeft because it should be coming from mLeft. Should check for any mLeft of mRight if there is one.
-						if (mCurrent->mRight != nullptr)
-						{
-							mCurrent = mCurrent->mRight;
-							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
-							{
-								nodeStack.push(mCurrent); // Save previous node
-
-								mCurrent = mCurrent->mLeft;
-							}
-						}
-						else if (nodeStack.size() > 0)
-						{
-							mCurrent = nodeStack.top(); // Go to the previous value.
-							nodeStack.pop();
-						}
-					}
-
-					T& operator*()
-					{
-						return mCurrent->mData;
-					}
-
-					bool operator==(const OrderedSet& other) const
-					{
-						return this == other;
-					}
-
-					bool operator!=(const OrderedSet& other) const
-					{
-						return !(this == other);
-					}
-				};
-
-				OrderedSetIterator begin()
-				{
-					return OrderedSetIterator(mRoot);
-				}
-				OrderedSetIterator end()
-				{
-					return OrderedSetIterator(mRoot, true);
-				}
 	};
 }
