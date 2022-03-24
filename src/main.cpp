@@ -8,8 +8,8 @@
 using namespace std;
 using namespace ssuds;
 
-int main(int argc, char**argv)
+int main(int argc, char** argv)
 {
-    testing::InitGoogleTest(&argc, argv);
-    RUN_ALL_TESTS();
+	testing::InitGoogleTest(&argc, argv);
+	RUN_ALL_TESTS();
 }

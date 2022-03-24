@@ -280,27 +280,13 @@ namespace ssuds
 					stack<Node*> nodeStack;
 
 				public:
-					// Should start at the far left mCurrent
-					OrderedSetIterator(Node* mRoot) : mCurrent(mRoot)
-					{
-						// Loop through the array
-						while (mCurrent->mLeft != nullptr)
-						{
-							nodeStack.push(mCurrent); // Save previous node
-
-							mCurrent = mCurrent->mLeft;
-						}
-					}
 					// Should return the end
 					OrderedSetIterator(Node* mRoot, bool atEnd) : mCurrent(mRoot)
 					{
 						// Loop through the array
 						if (atEnd)
 						{
-							while (mCurrent->mRight != nullptr)
-							{
-								mCurrent = mCurrent->mRight;
-							}
+							mCurrent = nullptr;
 						}
 						else
 						{
@@ -323,7 +309,6 @@ namespace ssuds
 							while (mCurrent->mLeft != nullptr) // if mRight has mLeft (smaller values) Iterate through mLefts until mCurrent is again the left-est value.
 							{
 								nodeStack.push(mCurrent); // Save previous node
-
 								mCurrent = mCurrent->mLeft;
 							}
 						}
@@ -331,6 +316,10 @@ namespace ssuds
 						{
 							mCurrent = nodeStack.top(); // Go to the previous value.
 							nodeStack.pop();
+						}
+						else
+						{
+							mCurrent = nullptr;
 						}
 					}
 					void operator++(int dummy)
@@ -352,6 +341,10 @@ namespace ssuds
 							mCurrent = nodeStack.top(); // Go to the previous value.
 							nodeStack.pop();
 						}
+						else
+						{
+							mCurrent = nullptr;
+						}
 					}
 
 					T& operator*()
@@ -359,20 +352,20 @@ namespace ssuds
 						return mCurrent->mData;
 					}
 
-					bool operator==(const OrderedSet& other) const
+					bool operator==(const OrderedSetIterator& other) const
 					{
-						return this == other;
+						return (mCurrent == &other.mCurrent) && (nodeStack == other.nodeStack);
 					}
 
-					bool operator!=(const OrderedSet& other) const
+					bool operator!=(const OrderedSetIterator& other) const
 					{
-						return !(this == other);
+						return (mCurrent != other.mCurrent);
 					}
 				};
 
 				OrderedSetIterator begin() const
 				{
-					return OrderedSetIterator(mRoot);
+					return OrderedSetIterator(mRoot, false);
 				}
 				OrderedSetIterator end() const
 				{

@@ -115,7 +115,7 @@ TEST_F(OrderedSetFixture, InitializerList)
 	EXPECT_EQ(mList.get_height(), tList.get_height());
 }
 
-TEST_F(OrderedSetFixture, Iterator)
+TEST_F(OrderedSetFixture, ManualIteration)
 {
 	OrderedSet<string>::OrderedSetIterator it = mList.begin();
 	EXPECT_EQ(*it, "A");
@@ -136,6 +136,18 @@ TEST_F(OrderedSetFixture, Iterator)
 	it++;
 	EXPECT_EQ(*it, "S");
 	it++;
+}
+
+TEST_F(OrderedSetFixture, PrettyIteration)
+{
+	int i = 0;
+	ArrayList<string> mListArray = mList.traversal(in_order);
+	cout << mListArray << endl;
+
+	for (string val : mList)
+	{
+		cout << "Current: " << val << endl;
+	}
 }
 
 OrderedSet<float> move_func()
