@@ -516,7 +516,7 @@ namespace ssuds
 			if (mRoot == nullptr)
 				return false;
 
-			if (mRoot->mData == val) // if the mRoot is the deleted value.
+			if (mRoot->mData == val) // if mRoot is the value I wanted deleted.
 			{
 				T& successor_val = mRoot->mRight->mLeft->mData;
 				mRoot->mData = successor_val;

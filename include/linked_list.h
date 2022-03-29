@@ -16,9 +16,7 @@ namespace ssuds
 			Node* mPrev;
 			Node* mNext;
 
-			Node(const T& value) : mData(value), mNext(nullptr), mPrev(nullptr)
-			{
-			}
+			Node(const T& value) : mData(value), mNext(nullptr), mPrev(nullptr) {}
 		};
 
 #pragma region ITERATOR

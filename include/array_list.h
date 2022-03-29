@@ -10,7 +10,7 @@
 // I can also provide you with a C++-only version of this
 // if that makes things a bit easier since the default-constructor issue is a not-super-importantant-to-
 // understanding-the-data-structure issue.
-#define MEMORY_ALLOCATOR 1				// 0 = new/delete 1 = malloc/free
+#define MEMORY_ALLOCATOR 0			// 0 = new/delete 1 = malloc/free
 
 #if MEMORY_ALLOCATOR == 1
 // C-style versions of the major memory operations
@@ -155,6 +155,11 @@ namespace ssuds
 		ArrayList() : mSize(0), mCapacity(0), mData(nullptr)
 		{
 			// intentionally empty
+		};
+
+		/// Capacity Constructor
+		ArrayList(int startingCapacity) : mSize(0), mCapacity(startingCapacity), mData(nullptr)
+		{
 		};
 
 		/// Copy-constructor

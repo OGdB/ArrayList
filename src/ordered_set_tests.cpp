@@ -142,11 +142,11 @@ TEST_F(OrderedSetFixture, PrettyIteration)
 {
 	int i = 0;
 	ArrayList<string> mListArray = mList.traversal(in_order);
-	cout << mListArray << endl;
 
 	for (string val : mList)
 	{
-		cout << "Current: " << val << endl;
+		EXPECT_EQ(val, mListArray[i]);
+		i++;
 	}
 }
 
