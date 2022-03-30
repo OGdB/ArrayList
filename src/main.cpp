@@ -16,10 +16,12 @@ int main(int argc, char** argv)
 
 	UnorderedMap<string, string> testMap;
 	testMap.append("Hello There!", "General Kenobi!");
-	testMap.append("Hello There!", "General Kenobi!");
-	testMap.append("Hello There!", "General Kenobi!");
-	testMap.append("Hello There!", "General Kenobi!");
-	testMap.append("Hello There!", "General Kenobi!");
-	testMap.append("Hello There!", "General Kenobi!");
+	cout << "Value at key 'Hello There!': ";
+	cout << testMap["Hello There!"] << endl;
+	//testMap.append("Hello There!", "General Kenobi!");
+	//testMap.append("Hello There!", "General Kenobi!");
+	//testMap.append("Hello There!", "General Kenobi!");
+	//testMap.append("Hello There!", "General Kenobi!");
+	//testMap.append("Hello There!", "General Kenobi!");
 	//testMap.test();
 }

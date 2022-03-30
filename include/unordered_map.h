@@ -26,8 +26,8 @@ namespace ssuds
 				mTable.append(nullptr);
 			}
 
-			cout << "Before inserting any value: \n";
-			cout << mTable << endl << endl;
+			//cout << "Before inserting any value: \n";
+			//cout << mTable << endl << endl;
 		}
 
 #pragma endregion
@@ -50,13 +50,45 @@ namespace ssuds
 			os << "]";
 			return os;
 		}
+
+		V& operator[](const K& key)
+		{
+			size_t hash_index = get_index_from_hash(key);
+
+			if (mTable[hash_index] != nullptr)  // If there is a pair at this hash_index
+			{
+				// Return mTable[hash] if mTable[hash]->first is the key. Otherwise, increment hash until key is found.
+				if (mTable[hash_index]->first != key)  // If the pair found at the index is not with the key that we entered, search until it is found.
+				{
+					for (int i = 1; i < mCapacity; i++) // Start at i=1 as the prev. check already established that the index was not 'this' hash.
+					{
+						int test_index = (i + hash_index) % mCapacity;
+
+						if (mTable[test_index]->first == key)
+						{
+							hash_index = test_index;
+							break;
+						}
+					}
+				}
+
+				return mTable[hash_index]->second; // Return the Value at the key
+			}
+			else  // There is no value at the hash_index -> create one and return reference to the value  the user should set.
+			{
+				V uninit;
+				mTable[hash_index] = new pair<K, V>(key, uninit);
+
+				return mTable[hash_index]->second;
+			}
+		}
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONS
 		void append(const K key, const V value)
 		{
 			grow();
-			size_t index = get_hash(key);
+			size_t index = get_index_from_hash(key);
 
 			// If index is occupied. Add 1 to index until empty spot is found. If at last index, start back at index 0
 			if (mTable[index] != nullptr)
@@ -75,12 +107,9 @@ namespace ssuds
 			}
 
 			//cout << "Inserting value at index: " << index << endl;
-			pair<K, V>* new_pair = new pair<K, V>(key, value); // Need to use 'new' to 'keep' the object outside of this void.
+			mTable[index] = new pair<K, V>(key, value); 
+			// Does not grow array or map size/capacity.
 
-			mTable[index] = new_pair; // Does not grow array or map size/capacity.
-			
-			//pair<K, V> test_pair = *mTable[index]; // De-referencing a pointer to a 'normal' variable.
-			//cout << test_pair.first << endl; // Now I can use it like 'normal'.
 		}
 
 		void test()
@@ -124,13 +153,27 @@ namespace ssuds
 
 				mCapacity *= 2;
 				// TODO: also grow array and re-insert all values
-				ArrayList<pair<K, V>*> bigger_array = ArrayList<pair<K, V>*>(mCapacity * 2);
+				ArrayList<pair<K, V>*> bigger_array = ArrayList<pair<K, V>*>(mCapacity);
 
-				mTable = ArrayList< pair<K, V>* >(mCapacity * 2); // New bigger array
+				for (int i = 1; i <= mCapacity; i++)
+				{
+					bigger_array.append(nullptr);
+				}
+
+				for (pair<K, V>* pair : mTable)
+				{
+					if (pair != nullptr)
+					{
+						size_t index = get_index_from_hash(pair->first); // Get the new hash value (with bigger mCap)
+						bigger_array[index] = pair; // Copy the pair over to the bigger array at the correct index
+					}
+				}
+
+				mTable = bigger_array; // New bigger array
 			}
 		}
 
-		unsigned int get_hash(const K& key) const
+		unsigned int get_index_from_hash(const K& key) const
 		{
 			return hash<K>{}(key) % mCapacity;
 		}
