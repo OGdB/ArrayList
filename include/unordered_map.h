@@ -14,7 +14,7 @@ namespace ssuds
 		int mSize;			// number of key-value pairs.
 		int mCapacity;		// number of available spots in our table.
 		
-		ArrayList< pair<K, V>* > mTable; // Arraylist with pointers to pairs in it.
+		ArrayList<pair<K, V>*> mTable; // Arraylist with pointers to pairs in it.
 
 #pragma region Constructors
 	public:
@@ -25,29 +25,41 @@ namespace ssuds
 			{
 				mTable.append(nullptr);
 			}
-
-			//cout << "Before inserting any value: \n";
-			//cout << mTable << endl << endl;
 		}
 
+		// Destructor
+		~UnorderedMap()
+		{
+			for (pair<K, V>* pair : mTable)
+			{
+				delete pair;
+			}
+		}
 #pragma endregion
 
 #pragma region OPERATOR_OVERRIDES
 
 		friend ostream& operator <<(ostream& os, const UnorderedMap<K, V>& omap)
 		{
-			os << "[";
+			os << "{";
 
-			for (int i = 0; i < omap.mSize; i++)
+			int mValues_added = 0;
+
+			for (int i = 0; i < omap.mCapacity; i++)
 			{
-				os << omap[i].first;
-				os << ", ";
-				os << omap[i].second;
-				if (i < omap.mSize - 1)
-					os << ", ";
+				if (omap.mTable[i] != nullptr)
+				{
+					os << omap.mTable[i]->first;
+					os << ": ";
+					os << omap.mTable[i]->second;
+					mValues_added += 1;
+
+					if (mValues_added != omap.mSize)  // Add a comma if all values haven't been added yet.
+						os << ", ";
+				}
 			}
 
-			os << "]";
+			os << "}";
 			return os;
 		}
 
@@ -57,28 +69,27 @@ namespace ssuds
 
 			if (mTable[hash_index] != nullptr)  // If there is a pair at this hash_index
 			{
-				// Return mTable[hash] if mTable[hash]->first is the key. Otherwise, increment hash until key is found.
-				if (mTable[hash_index]->first != key)  // If the pair found at the index is not with the key that we entered, search until it is found.
+				for (int i = 1; i < mCapacity; i++) // Start at i=1 as the prev. check already established that the index was not 'this' hash.
 				{
-					for (int i = 1; i < mCapacity; i++) // Start at i=1 as the prev. check already established that the index was not 'this' hash.
-					{
-						int test_index = (i + hash_index) % mCapacity;
+					int test_index = (i + hash_index) % mCapacity;
 
-						if (mTable[test_index]->first == key)
-						{
-							hash_index = test_index;
-							break;
-						}
+					if (mTable[test_index] == nullptr)
+					{
+						hash_index = test_index;
+						break;
 					}
 				}
 
+				V uninit;
+				mTable[hash_index] = new pair<K, V>(key, uninit);
+				grow();
 				return mTable[hash_index]->second; // Return the Value at the key
 			}
 			else  // There is no value at the hash_index -> create one and return reference to the value  the user should set.
 			{
 				V uninit;
 				mTable[hash_index] = new pair<K, V>(key, uninit);
-
+				grow();
 				return mTable[hash_index]->second;
 			}
 		}
@@ -173,7 +184,7 @@ namespace ssuds
 			}
 		}
 
-		unsigned int get_index_from_hash(const K& key) const
+		size_t get_index_from_hash(const K& key) const
 		{
 			return hash<K>{}(key) % mCapacity;
 		}
