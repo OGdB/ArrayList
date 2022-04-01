@@ -10,6 +10,93 @@ namespace ssuds
 	template <class K, class V>
 	class UnorderedMap
 	{
+
+#pragma region ITERATOR
+	public:
+		class UnorderedMapIterator
+		{
+		protected:
+			// Attributes
+			ArrayList<pair<K, V>*> mTable;
+			int cur_index;
+
+		public:
+			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, bool atEnd = false) : mTable(arr)
+			{
+				// Once first value is found (not a nullptr), break loop and set to current.
+				if (!atEnd)
+				{
+					for (int i = 0; i < mTable.size(); i++)
+					{
+						if (mTable[i] != nullptr)
+						{
+							cur_index = i;
+							break;
+						}
+					}
+				}
+				else 
+				{
+					for (int i = mTable.size(); i > 0; i--)
+					{
+						if (mTable[i] != nullptr)
+						{
+							cur_index = i;
+							break;
+						}
+					}
+				}
+			}
+
+			void operator++()
+			{
+				for (int i = cur_index + 1; i < mTable.size(); i++) // Loop until end of mTable. Start at index after current index.
+				{
+					if (mTable[i] != nullptr)
+					{
+						cur_index = i;
+						break;
+					}
+				}
+			}
+			void operator++(int dummy)
+			{
+				for (int i = cur_index + 1; i < mTable.size(); i++) // Loop until end of mTable. Start at index after current index.
+				{
+					if (mTable[i] != nullptr)
+					{
+						cur_index = i;
+						break;
+					}
+				}
+			}
+
+			V& operator*()
+			{
+				return mTable[cur_index]->second;
+			}
+
+			bool operator==(const UnorderedMapIterator& other) const
+			{
+				return mTable == other.mTable && cur_index == other.cur_index;
+			}
+
+			bool operator!=(const UnorderedMapIterator& other) const
+			{
+				return mTable != other.mTable && cur_index != other.cur_index;
+			}
+		};
+
+		UnorderedMapIterator begin() const
+		{
+			return UnorderedMapIterator(mTable, false);
+		}
+		UnorderedMapIterator end() const
+		{
+			return UnorderedMapIterator(mTable, true);
+		}
+#pragma endregion
+
 	protected:
 		int mSize;			// number of key-value pairs.
 		int mCapacity;		// number of available spots in our table.
@@ -65,7 +152,7 @@ namespace ssuds
 
 		V& operator[](const K& key)
 		{
-			size_t hash_index = get_index_from_hash(key);
+			int hash_index = get_index_from_hash(key);
 
 			if (mTable[hash_index] != nullptr)  // If there is a pair at this hash_index
 			{
@@ -96,30 +183,8 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONS
-		void append(const K key, const V value)
+		void find(V value)
 		{
-			grow();
-			size_t index = get_index_from_hash(key);
-
-			// If index is occupied. Add 1 to index until empty spot is found. If at last index, start back at index 0
-			if (mTable[index] != nullptr)
-			{
-				for (int i = 1; i < mCapacity; i++) // Start at i=1 as the prev. check already established that the index was occupied.
-				{
-					int test_index = (i + index) % mCapacity;
-					//cout << "Check if value: " << test_index << " is empty.\n";
-					if (mTable[test_index] == nullptr)
-					{
-						//cout << "Index " << test_index << " is not used.\n";
-						index = test_index;
-						break;
-					}
-				}
-			}
-
-			//cout << "Inserting value at index: " << index << endl;
-			mTable[index] = new pair<K, V>(key, value); 
-			// Does not grow array or map size/capacity.
 
 		}
 
@@ -184,7 +249,7 @@ namespace ssuds
 			}
 		}
 
-		size_t get_index_from_hash(const K& key) const
+		int get_index_from_hash(const K& key) const
 		{
 			return hash<K>{}(key) % mCapacity;
 		}

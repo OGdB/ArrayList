@@ -22,5 +22,11 @@ int main(int argc, char** argv)
 	// cout << "Value at key 'Hello There!': " << testMap["Hello There!"] << endl;
 	cout << testMap << endl;
 
+	UnorderedMap<string, string>::UnorderedMapIterator it = testMap.begin();
+	cout << *it << endl;
+	++it;
+	cout << *it << endl;
+
+
 	//testMap.test();
 }
