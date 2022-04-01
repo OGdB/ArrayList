@@ -98,7 +98,7 @@ namespace ssuds
 
 #pragma region Constructors
 	public:
-		UnorderedMap(int startCapacity = 10) : mSize(0), mCapacity(startCapacity) 
+		UnorderedMap(int startCapacity = 11) : mSize(0), mCapacity(startCapacity) 
 		{
 			// Should fill each value of the mCapacity with a nullptr
 			for (int i = 1; i <= mCapacity; i++)
@@ -162,14 +162,20 @@ namespace ssuds
 
 				V uninit;
 				mTable[hash_index] = new pair<K, V>(key, uninit);
-				grow();
+
+				if (grow())
+					hash_index = get_index_from_hash(key);
+
 				return mTable[hash_index]->second; // Return the Value at the key
 			}
 			else  // There is no value at the hash_index -> create one and return reference to the value  the user should set.
 			{
 				V uninit;
 				mTable[hash_index] = new pair<K, V>(key, uninit);
-				grow();
+
+				if (grow())
+					hash_index = get_index_from_hash(key);			
+
 				return mTable[hash_index]->second;
 			}
 		}
@@ -194,34 +200,36 @@ namespace ssuds
 #pragma region INTERNAL
 	protected:
 		/// @brief Double capacity once mSize is at about 70% of capacity.
-		void grow()
+		/// @return Returns true if 70% capacity was reached.
+		bool grow()
 		{
 			mSize++;
-
-			if ((float)(mSize / mCapacity) >= 0.7f)
+			if (((float)mSize / (float)mCapacity) >= 0.7f)
 			{
-				cout << "70% capacity reached. Grow operation/\n";
+				// cout << "70% capacity reached. Grow operation/\n";
 
 				mCapacity *= 2;
-				// TODO: also grow array and re-insert all values
-				ArrayList<pair<K, V>*> bigger_array = ArrayList<pair<K, V>*>(mCapacity);
-
+				ArrayList<pair<K, V>*> bigger_array;
 				for (int i = 1; i <= mCapacity; i++)
 				{
 					bigger_array.append(nullptr);
 				}
 
-				for (pair<K, V>* pair : mTable)
+				for (pair<K, V>* old_pair : mTable)
 				{
-					if (pair != nullptr)
+					if (old_pair != nullptr)
 					{
-						size_t index = get_index_from_hash(pair->first); // Get the new hash value (with bigger mCap)
-						bigger_array[index] = pair; // Copy the pair over to the bigger array at the correct index
+						int hash_index = get_index_from_hash(old_pair->first);
+						bigger_array[hash_index] = new pair<K, V>(old_pair->first, old_pair->second);
+
 					}
 				}
 
 				mTable = bigger_array; // New bigger array
+				return true;
 			}
+
+			return false;
 		}
 
 		int size()

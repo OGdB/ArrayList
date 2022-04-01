@@ -17,11 +17,24 @@ int main(int argc, char** argv)
 	UnorderedMap<string, string> testMap;
 
 	testMap["Hello There!"] = "General Kenobi!";
-	testMap["What did the beaver say when he slipped on water?"] = "Damn it!";
+	testMap["asdasd"] = "czxc it!";
+	testMap["asdasdgf"] = "ncvbn it!";
+	testMap["gsdfgsdfg"] = "sdfg it!";
+	testMap["jdfdf"] = "ncvbn it!";
+	testMap["dfghdfv"] = "tert it!";
+	testMap["vbcvb"] = "ghh it!";
+	testMap["yerty"] = "bxcv it!";
+	testMap["jdfgjdf"] = "Damn it!";
+	testMap["kkbv"] = "gsgdf it!";
+	testMap["gdgfg"] = "gsgdf it!";
+	testMap["asd"] = "gsgdf it!";
+	testMap["56657"] = "gsgdf it!";
 
+	int testint = 0;
 	UnorderedMap<string, string>::UnorderedMapIterator it = testMap.begin();
 	for (pair<string,string>* pair : testMap)
 	{
-		cout << pair->first << endl;
+		testint++;
+		cout << testint << ": " << pair->first << endl;
 	}
 }
