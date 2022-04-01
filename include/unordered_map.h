@@ -18,72 +18,65 @@ namespace ssuds
 		protected:
 			// Attributes
 			ArrayList<pair<K, V>*> mTable;
-			int cur_index;
+			int spot;
 
 		public:
-			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, bool atEnd = false) : mTable(arr)
+			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, bool at_end = false) : mTable(arr)
 			{
 				// Once first value is found (not a nullptr), break loop and set to current.
-				if (!atEnd)
+				if (!at_end)
 				{
 					for (int i = 0; i < mTable.size(); i++)
 					{
 						if (mTable[i] != nullptr)
 						{
-							cur_index = i;
+							spot = i;
 							break;
 						}
 					}
 				}
 				else 
-				{
-					for (int i = mTable.size(); i > 0; i--)
-					{
-						if (mTable[i] != nullptr)
-						{
-							cur_index = i;
-							break;
-						}
-					}
-				}
+					spot = mTable.size();
 			}
+			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, int start_spot) : mTable(arr) { }
 
 			void operator++()
 			{
-				for (int i = cur_index + 1; i < mTable.size(); i++) // Loop until end of mTable. Start at index after current index.
+				for (int i = spot + 1; i < mTable.size() + 1; i++) // Loop until end of mTable. Start at index after current index.
 				{
-					if (mTable[i] != nullptr)
+					if (i == mTable.size() || mTable[i] != nullptr) // If this index is not a nullptr
 					{
-						cur_index = i;
+						spot = i; // Set that to the current index.
 						break;
 					}
 				}
 			}
 			void operator++(int dummy)
 			{
-				for (int i = cur_index + 1; i < mTable.size(); i++) // Loop until end of mTable. Start at index after current index.
+				for (int i = spot + 1; i < mTable.size() + 1; i++) // Loop until end of mTable. Start at index after current index.
 				{
-					if (mTable[i] != nullptr)
+					if (i == mTable.size() || mTable[i] != nullptr) // If this index is not a nullptr
 					{
-						cur_index = i;
+						spot = i; // Set that to the current index.
 						break;
 					}
 				}
 			}
 
-			V& operator*()
+			pair<K, V>*& operator*()
 			{
-				return mTable[cur_index]->second;
+				if (mTable[spot] != nullptr)
+					return mTable[spot];
 			}
 
 			bool operator==(const UnorderedMapIterator& other) const
 			{
-				return mTable == other.mTable && cur_index == other.cur_index;
+				return spot == other.spot;
 			}
 
 			bool operator!=(const UnorderedMapIterator& other) const
 			{
-				return mTable != other.mTable && cur_index != other.cur_index;
+				return spot != other.spot;
 			}
 		};
 
@@ -183,37 +176,19 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONS
-		void find(V value)
-		{
+		//UnorderedMapIterator find(K search_key)
+		//{
+		//	for (pair<K, V>* pair : this)
+		//	{
+		//		if (pair->first == search_key)
+		//		{
+		//			return *pair;
+		//		}
+		//	}
 
-		}
+		//	return end();
+		//}
 
-		void test()
-		{
-			//cout << "After adding value: \n";
-			//cout << mTable << endl << endl;
-			//cout << "Value at index 6: " << mTable[6] << endl << endl;
-			//cout << "'&map_array[6]->first' value: " << mTable[6]->first << endl << endl;
-
-			//cout << "Direct call" << endl;
-			//cout << mTable[6]->first << endl;
-
-			////cout << "&map_Array[6] is an " << typeid(mTable[6]->first).name() << endl;
-			//////cout << map_array[9]->first << endl;
-
-			for (int i = 0; i < mCapacity; i++)
-			{
-				if (mTable[i] != nullptr)
-				{
-					cout << "At index " << i << ": " << "[" << mTable[i]->first << ", " << mTable[i]->second << "]" << endl;
-				}
-			}
-			for (pair<K, V>* pair : mTable)
-			{
-				if (pair != nullptr)
-					cout << pair->first << endl;
-			}
-		}
 #pragma endregion
 
 #pragma region INTERNAL
@@ -247,6 +222,11 @@ namespace ssuds
 
 				mTable = bigger_array; // New bigger array
 			}
+		}
+
+		int size()
+		{
+			return mCapacity;
 		}
 
 		int get_index_from_hash(const K& key) const

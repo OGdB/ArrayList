@@ -216,7 +216,6 @@ namespace ssuds
 
 		ArrayListIterator begin() const
 		{
-			//return ArrayListIterator(, 0);
 			return ArrayListIterator(*this, ArrayListIteratorType::forward, 0);
 		}
 

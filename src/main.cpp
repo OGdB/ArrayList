@@ -15,18 +15,13 @@ int main(int argc, char** argv)
 	//RUN_ALL_TESTS();
 
 	UnorderedMap<string, string> testMap;
-	/*testMap.append("Hello There!", "General Kenobi!");*/
+
 	testMap["Hello There!"] = "General Kenobi!";
 	testMap["What did the beaver say when he slipped on water?"] = "Damn it!";
 
-	// cout << "Value at key 'Hello There!': " << testMap["Hello There!"] << endl;
-	cout << testMap << endl;
-
 	UnorderedMap<string, string>::UnorderedMapIterator it = testMap.begin();
-	cout << *it << endl;
-	++it;
-	cout << *it << endl;
-
-
-	//testMap.test();
+	for (pair<string,string>* pair : testMap)
+	{
+		cout << pair->first << endl;
+	}
 }
