@@ -31,8 +31,17 @@ int main(int argc, char** argv)
 	testMap["56657"] = "gsgdf it!";
 
 	int testint = 0;
-	UnorderedMap<string, string>::UnorderedMapIterator it = testMap.begin();
+
 	for (pair<string,string>* pair : testMap)
+	{
+		testint++;
+		cout << testint << ": " << pair->first << endl;
+	}
+
+	testMap.remove("Hello There!");
+	cout << endl << endl;
+	testint = 0;
+	for (pair<string, string>* pair : testMap)
 	{
 		testint++;
 		cout << testint << ": " << pair->first << endl;

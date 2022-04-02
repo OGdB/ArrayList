@@ -38,7 +38,20 @@ namespace ssuds
 				else 
 					spot = mTable.size();
 			}
-			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, int start_spot) : mTable(arr) { }
+
+			/// @brief Iterator constructor 'starting' at a specific pair.
+			/// @param start_pair the pair to start the iteration from onwards.
+			UnorderedMapIterator(const ArrayList<pair<K, V>*>& arr, const pair<K, V>* start_pair) : mTable(arr)
+			{ 
+				for (int i = 0; i < mTable.size(); i++)
+				{
+					if (mTable[i] == start_pair)
+					{
+						spot = i;
+						break;
+					}
+				}
+			}
 
 			void operator++()
 			{
@@ -65,8 +78,7 @@ namespace ssuds
 
 			pair<K, V>*& operator*()
 			{
-				if (mTable[spot] != nullptr)
-					return mTable[spot];
+				return mTable[spot];
 			}
 
 			bool operator==(const UnorderedMapIterator& other) const
@@ -182,18 +194,65 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONS
-		//UnorderedMapIterator find(K search_key)
-		//{
-		//	for (pair<K, V>* pair : this)
-		//	{
-		//		if (pair->first == search_key)
-		//		{
-		//			return *pair;
-		//		}
-		//	}
+		UnorderedMapIterator find(K& search_key) const
+		{
+			for (pair<K, V>* pair : *this)
+			{
+				if (pair->first == search_key)
+				{
+					return UnorderedMapIterator(mTable, pair);
+				}
+			}
 
-		//	return end();
-		//}
+			return end();
+		}
+
+		bool remove(const K& key)
+		{
+			int sindex = get_index_from_hash(key);
+			int kindex;
+			bool index_found = false;
+			ArrayList<pair<K, V>*> temp_array;
+
+			for (int i = 0; i < mCapacity; i++)
+			{
+				int test_index = (i + sindex) % mCapacity; // Index that can wrap around to the beginning of the array.
+
+				if (mTable[test_index] != nullptr)
+				{
+					K this_pair = mTable[test_index]->first;
+					if (this_pair == key)  // If key is found, add every key after it until the next nullptr to a temp array, and remove that value..
+					{
+						index_found = true;
+						kindex = test_index;
+						delete mTable[kindex];
+						mTable[kindex] = nullptr;
+						continue; // Go to the next value if the value is removed.
+					}
+				}
+
+				if (index_found == true && mTable[test_index] != nullptr) // Keeps going until a nullptr if index is found
+				{
+					temp_array.append(mTable[test_index]);
+					delete mTable[test_index];
+					mTable[test_index] = nullptr;
+				}
+				else if (index_found == true && mTable[test_index] == nullptr) // End of block after deleted index is found.
+				{
+					break; // End of block is found. Get out of this loop.
+				}
+				
+			}
+
+			// add values in temp array (that came after the deleted value) back into mTable. (if any).
+			for (int i = 0; i < temp_array.size(); i++)
+			{
+				int hash_index = get_index_from_hash(temp_array[i]->first);
+				mTable[hash_index] = temp_array[i];
+			}
+
+			return true;
+		}
 
 #pragma endregion
 
