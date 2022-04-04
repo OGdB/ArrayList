@@ -161,9 +161,15 @@ namespace ssuds
 
 			if (mTable[hash_index] != nullptr)  // If there is a pair at this hash_index
 			{
+				if (mTable[hash_index]->first == key)
+					return mTable[hash_index]->second;
+
 				for (int i = 1; i < mCapacity; i++) // Start at i=1 as the prev. check already established that the index was not 'this' hash.
 				{
 					int test_index = (i + hash_index) % mCapacity;
+
+					if (mTable[test_index] != nullptr && mTable[test_index]->first == key)
+						return mTable[hash_index]->second;
 
 					if (mTable[test_index] == nullptr)
 					{
@@ -194,6 +200,9 @@ namespace ssuds
 #pragma endregion
 
 #pragma region TOP_LEVEL_FUNCTIONS
+		/// @brief Takes key and returns iterator to the found pair or end if it wasn't found.
+		/// @param search_key the key to find.
+		/// @return iterator at value or end.
 		UnorderedMapIterator find(K& search_key) const
 		{
 			for (pair<K, V>* pair : *this)
@@ -207,6 +216,25 @@ namespace ssuds
 			return end();
 		}
 
+		/// @brief Returns whether key is in map.
+		/// @param search_key The key to find.
+		/// @return Whether the key in in map.
+		bool contains(K& search_key) const
+		{
+			for (pair<K, V>* pair : *this)
+			{
+				if (pair->first == search_key)
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		/// @brief Removes pair from map.
+		/// @param key The key to the pair to remove.
+		/// @return Whether removal was success.
 		bool remove(const K& key)
 		{
 			int sindex = get_index_from_hash(key);
@@ -233,9 +261,12 @@ namespace ssuds
 
 				if (index_found == true && mTable[test_index] != nullptr) // Keeps going until a nullptr if index is found
 				{
-					temp_array.append(mTable[test_index]);
+					pair<K, V>* pair_at_index = mTable[test_index];
+					temp_array.append(pair_at_index);
 					delete mTable[test_index];
 					mTable[test_index] = nullptr;
+
+					cout << "Re-insert value!\n";
 				}
 				else if (index_found == true && mTable[test_index] == nullptr) // End of block after deleted index is found.
 				{
@@ -248,7 +279,8 @@ namespace ssuds
 			for (int i = 0; i < temp_array.size(); i++)
 			{
 				int hash_index = get_index_from_hash(temp_array[i]->first);
-				mTable[hash_index] = temp_array[i];
+				pair<K, V>* this_pair = new pair<K, V>(temp_array[i]->first, temp_array[i]->second);
+				mTable[hash_index] = this_pair;
 			}
 
 			return true;

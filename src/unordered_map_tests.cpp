@@ -17,79 +17,55 @@ class UnorderedMapFixture : public ::testing::Test
 {
 protected:
 	UnorderedMap<string, int> mList;
-	UnorderedMap<string, int> mList2;
+	UnorderedMap<int, int> mList2;
 
 	void SetUp() override
 	{
 		mList["Oeds"] = 1998;
 		mList["Weed"] = 420;
 		mList["Nice"] = 69;
+
+		mList2[0] = 0;
+		mList2[1] = 1;
+		mList2[2] = 2;
 	}
 };
 
-TEST_F(UnorderedMapFixture, ClearSet)
+TEST_F(UnorderedMapFixture, BracketOperatorGetValue)
 {
-
+	EXPECT_EQ(mList["Oeds"], 1998);
+	EXPECT_EQ(mList["Weed"], 420);
+	EXPECT_EQ(mList["Nice"], 69);
 }
 
 TEST_F(UnorderedMapFixture, ContainsValue)
 {
+	string searchVal = "Oeds";
+	EXPECT_EQ(mList.contains(searchVal), true);
 
+	searchVal = "Weed";
+	EXPECT_EQ(mList.contains(searchVal), true);
+
+	searchVal = "Jason";
+	EXPECT_EQ(mList.contains(searchVal), false);
 }
 
-TEST_F(UnorderedMapFixture, CopyConstructor)
+TEST_F(UnorderedMapFixture, RemoveValue)
 {
-
-}
-
-TEST_F(UnorderedMapFixture, EqualOperator)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, EraseValue)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, InitializerList)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, ManualIteration)
-{
-
+	mList.remove("Oeds");
+	string searchVal = "Oeds";
+	EXPECT_EQ(mList.contains(searchVal), false);
 }
 
 TEST_F(UnorderedMapFixture, PrettyIteration)
 {
+	int testint = 0;
 
+	for (pair<int, int>* pair : mList2)
+	{
+		EXPECT_EQ(mList2[testint], testint);
+		cout << mList2[testint] << endl;
+		testint++;
+	}
 }
-
-TEST_F(UnorderedMapFixture, MoveConstructor)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, Rebalance)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, OS_Stream)
-{
-	
-}
-
-TEST_F(UnorderedMapFixture, SetSizes)
-{
-
-}
-
-TEST_F(UnorderedMapFixture, TraversalMethod)
-{
-	
-}
-
 #endif
