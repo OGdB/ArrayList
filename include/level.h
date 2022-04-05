@@ -6,8 +6,7 @@ using namespace std;
 
 namespace ssuds
 {
-	template <class K, class V>
-	class Graph
+	class Level
 	{
 
 #pragma region ITERATOR
@@ -33,11 +32,11 @@ namespace ssuds
 
 			}
 
-			bool operator==(const UnorderedMapIterator& other) const
+			bool operator==(const GraphIterator& other) const
 			{
 			}
 
-			bool operator!=(const UnorderedMapIterator& other) const
+			bool operator!=(const GraphIterator& other) const
 			{
 			}
 		};
@@ -55,20 +54,20 @@ namespace ssuds
 		
 #pragma region Constructors
 	public:
-		Graph()
+		Level()
 		{
 
 		}
 
 		// Destructor
-		~Graph()
+		~Level()
 		{
 		}
 #pragma endregion
 
 #pragma region OPERATOR_OVERRIDES
 
-		friend ostream& operator <<(ostream& os, const UnorderedMap<K, V>& omap)
+		friend ostream& operator <<(ostream& os, const Level& omap)
 		{
 			
 			return os;

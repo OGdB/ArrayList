@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\graph_tests.cpp" />
+    <ClCompile Include="..\..\src\level.cpp" />
     <ClCompile Include="..\..\src\linked_list_tests.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\ordered_set_tests.cpp" />
@@ -20,7 +20,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\array_list.h" />
     <ClInclude Include="..\..\include\array_list_utility.h" />
-    <ClInclude Include="..\..\include\graph.h" />
+    <ClInclude Include="..\..\include\level.h" />
     <ClInclude Include="..\..\include\linked_list.h" />
     <ClInclude Include="..\..\include\ordered_set.h" />
     <ClInclude Include="..\..\include\ssuds.h" />

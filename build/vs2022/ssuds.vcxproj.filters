@@ -27,7 +27,7 @@
     <ClCompile Include="..\..\src\unordered_map_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\graph_tests.cpp">
+    <ClCompile Include="..\..\src\level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="..\..\include\unordered_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\graph.h">
+    <ClInclude Include="..\..\include\level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
