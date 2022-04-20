@@ -1,0 +1,11 @@
+n A 0 0 0
+n B 0 0 0
+n C 0 0 0
+n D 0 0 0
+n E 0 0 0
+n F 0 0 0
+e A B 1
+e A D 1
+e B C 1
+e D E 1
+e C F 1

@@ -100,32 +100,32 @@ public:
 		LevelNode& start_node = mGraph[start_node_name];
 
 		frontier.push(start_node);
-		traversed_nodes.append(start_node_name);
 		cout << start_node.getName() << " ";
 
 		while (frontier.size() > 0)
 		{
 			queue<LevelNode> new_frontier;
 
-			for (int i = 0; i < frontier.size(); i++)  // For each node in the frontier
+			for (int i = 0; i <= frontier.size(); i++)  // For each node in the frontier
 			{
 				LevelNode this_node = frontier.front();
 
 				// For each neighbour of this node in the frontier
 				for (auto& neighbour : this_node.getNeighbours())
 				{
-					// If this neighbour has not already been traversed
-					if (!traversed_nodes.contains(neighbour.first))
+					if (!traversed_nodes.contains(neighbour.first))  // If this neighbour has not already been traversed
 					{
-						traversed_nodes.append(neighbour.first);
+						// Add to traversed nodes and add to new frontier
 						new_frontier.push(mGraph[neighbour.first]);
+						traversed_nodes.append(neighbour.first);
 						cout << neighbour.first << " ";
 					}
 				}
+
+				frontier.pop();
 			}
 
 			frontier = new_frontier;
-			frontier.pop();
 		}
 	}
 
