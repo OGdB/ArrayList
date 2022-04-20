@@ -39,7 +39,7 @@ Level::Level(const string& file_directory)
 					//if (node1 != node2)  // Cannot connect a node with itself
 					mGraph[node1][node2] = edge_thickness;
 
-					cout << "Found edge from " << node1 << " to " << node2 << endl;
+					//cout << "Found edge from " << node1 << " to " << node2 << endl;
 				}
 			}
 		}

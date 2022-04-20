@@ -232,6 +232,19 @@ namespace ssuds
 			mCapacity = 0;
 		}
 
+		bool contains(T val) const
+		{
+			for (size_t i = 0; i < size(); i++)
+			{
+				T this_val = mData[i];
+
+				if (this_val == val)
+					return true;
+			}
+
+			return false;
+		}
+
 		ArrayListIterator end() const
 		{
 			return ArrayListIterator(*this, ArrayListIteratorType::forward, mSize);

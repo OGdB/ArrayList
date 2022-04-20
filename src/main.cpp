@@ -11,8 +11,6 @@ int main(int argc, char** argv)
 	//testing::InitGoogleTest(&argc, argv);
 	//RUN_ALL_TESTS();
 
-	Level graph = Level("maps\\map01.txt");
-
-	cout << graph << endl;
-	
+	Level graph = Level("maps\\map06.txt");
+	graph.BreadthFirstTraversal("A");
 }

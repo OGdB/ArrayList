@@ -2,8 +2,11 @@
 #include <string>
 #include <stack>
 #include <map>
+#include <queue>
+#include <array_list.h>
 
 using namespace std;
+using namespace ssuds;
 
 class Level
 {
@@ -46,6 +49,7 @@ public:
 		}
 
 		LevelNode() { }
+
 		LevelNode(const string& n, const int& xPos, const int& yPos, const int& rad)
 		{
 			name = n;
@@ -58,51 +62,17 @@ public:
 		{
 			return name;
 		}
-		int neighbour_count() const
+
+		int neighbourCount() const
 		{
 			return neighbours.size();
 		}
-	};
 
-#pragma region ITERATOR
-//public:
-//	class GraphIterator
-//	{
-//	protected:
-//		// Attributes
-//
-//
-//	public:
-//		GraphIterator()
-//		{
-//
-//		}
-//
-//		void operator++()
-//		{
-//
-//		}
-//		void operator++(int dummy)
-//		{
-//
-//		}
-//
-//		bool operator==(const GraphIterator& other) const
-//		{
-//		}
-//
-//		bool operator!=(const GraphIterator& other) const
-//		{
-//		}
-//	};
-//
-//	GraphIterator begin() const
-//	{
-//	}
-//	GraphIterator end() const
-//	{
-//	}
-#pragma endregion
+		map<string, float> getNeighbours() const
+		{
+			return neighbours;
+		}
+	};
 
 public:
 	map<string, LevelNode> mGraph;  // Node info
@@ -121,12 +91,47 @@ public:
 		}
 
 		return os;
-		
-		//(A:300 : 300 : 30) | (B:1.5) (C:9.4) (D:4.2)
-		//(B:100 : 100 : 30) |
-		//(C:250 : 550 : 30) | (E:5.3)
-		//(E:520 : 300 : 30) | (B:12.4)
-		//(D:550 : 100 : 30) | (A:4.2) (B:0.6)
+	}
+
+	void BreadthFirstTraversal(const string& start_node_name)
+	{
+		queue<LevelNode> frontier;
+		ArrayList<string> traversed_nodes;  // The visited nodes' names
+		LevelNode& start_node = mGraph[start_node_name];
+
+		frontier.push(start_node);
+		traversed_nodes.append(start_node_name);
+		cout << start_node.getName() << " ";
+
+		while (frontier.size() > 0)
+		{
+			queue<LevelNode> new_frontier;
+
+			for (int i = 0; i < frontier.size(); i++)  // For each node in the frontier
+			{
+				LevelNode this_node = frontier.front();
+
+				// For each neighbour of this node in the frontier
+				for (auto& neighbour : this_node.getNeighbours())
+				{
+					// If this neighbour has not already been traversed
+					if (!traversed_nodes.contains(neighbour.first))
+					{
+						traversed_nodes.append(neighbour.first);
+						new_frontier.push(mGraph[neighbour.first]);
+						cout << neighbour.first << " ";
+					}
+				}
+			}
+
+			frontier = new_frontier;
+			frontier.pop();
+		}
+	}
+
+	void DepthFirstTraversal(const LevelNode& start_node, const LevelNode& cur_node)
+	{
+
 	}
 
 };
